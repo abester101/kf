@@ -1,0 +1,13 @@
+PODS:
+  - Heap (2.1.5)
+  - Masonry (0.6.1)
+
+DEPENDENCIES:
+  - Heap
+  - Masonry
+
+SPEC CHECKSUMS:
+  Heap: 9d41b3d07bc86c9127364b638c710d854390a113
+  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
+
+COCOAPODS: 0.38.0
