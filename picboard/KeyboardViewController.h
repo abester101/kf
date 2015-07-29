@@ -16,7 +16,7 @@
 #import <Crashlytics/Crashlytics.h>
 
 #define APP_ID @"4efbf1dd9a1b4a058a4c3772876d9400"
-#define PROMO_TEXT @"Sent via KeyFeed - www.apple.co/1DbnRU3"
+#define PROMO_TEXT @"\n\nSent via KeyFeed - www.apple.co/1DbnRU3"
 
 @interface KeyboardViewController : UIInputViewController <IGSessionDelegate, NSURLConnectionDelegate, UIScrollViewDelegate>
 
