@@ -96,7 +96,6 @@
 		ADDBD8F71AABB4E800566F7F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDBD8F41AABB4B600566F7F /* Reachability.m */; };
 		ADDBD8F81AABB4E800566F7F /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = ADDBD8F51AABB4B600566F7F /* Reachability.h */; };
 		ADE09D161ACA864C009327D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADF433761A1F6C8D00134224 /* Images.xcassets */; };
-		ADF117BE1AA247BE009094E3 /* DecimalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF117BD1AA247BE009094E3 /* DecimalViewController.m */; };
 		ADF117C51AA2504C009094E3 /* twobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF117C21AA2504C009094E3 /* twobutton.png */; };
 		ADF117C71AA2504C009094E3 /* onebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF117C41AA2504C009094E3 /* onebutton.png */; };
 		ADF117C81AA25295009094E3 /* twobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF117C21AA2504C009094E3 /* twobutton.png */; };
@@ -345,8 +344,6 @@
 		AD9EA84F1A2B829600DE5DD4 /* backbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backbutton@2x.png"; sourceTree = SOURCE_ROOT; };
 		ADDBD8F41AABB4B600566F7F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		ADDBD8F51AABB4B600566F7F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		ADF117BC1AA247BE009094E3 /* DecimalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecimalViewController.h; sourceTree = "<group>"; };
-		ADF117BD1AA247BE009094E3 /* DecimalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecimalViewController.m; sourceTree = "<group>"; };
 		ADF117C21AA2504C009094E3 /* twobutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twobutton.png; sourceTree = SOURCE_ROOT; };
 		ADF117C41AA2504C009094E3 /* onebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onebutton.png; sourceTree = SOURCE_ROOT; };
 		ADF117CB1AA25819009094E3 /* onebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onebutton@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -716,8 +713,6 @@
 				ADF433B11A1F7E7B00134224 /* picboard.entitlements */,
 				ADF433A61A1F731200134224 /* KeyboardViewController.h */,
 				ADF433A71A1F731200134224 /* KeyboardViewController.m */,
-				ADF117BC1AA247BE009094E3 /* DecimalViewController.h */,
-				ADF117BD1AA247BE009094E3 /* DecimalViewController.m */,
 				ADF433A41A1F731200134224 /* Supporting Files */,
 			);
 			path = picboard;
@@ -1168,7 +1163,6 @@
 				ADDBD8F61AABB4B600566F7F /* Reachability.m in Sources */,
 				ADF4336F1A1F6C8D00134224 /* AppDelegate.m in Sources */,
 				ADF4336C1A1F6C8D00134224 /* main.m in Sources */,
-				ADF117BE1AA247BE009094E3 /* DecimalViewController.m in Sources */,
 				ADF433991A1F6CEE00134224 /* IGRequest.m in Sources */,
 				AD27097F1A639D6A00F53D0E /* TroubleshootingViewController.m in Sources */,
 			);

@@ -10,7 +10,6 @@
 #import "Instagram.h"
 
 #import "Reachability.h"
-#import "DecimalViewController.h"
 #import "Masonry.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
