@@ -14,15 +14,38 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#define APP_GROUP @"group.KeyFeed.KeyFeed"
+
 #define APP_ID @"4efbf1dd9a1b4a058a4c3772876d9400"
 #define PROMO_TEXT @"\n\nSent via KeyFeed - www.apple.co/1DbnRU3"
+
+
+@interface InstagramObject : NSObject
+
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *caption;
+@property (strong, nonatomic) NSString *link;
+@property (strong, nonatomic) NSString *photoID;
+@property (strong, nonatomic) NSString *photoURLString;
+@property (assign, nonatomic) BOOL liked;
+
+@property (strong, nonatomic) NSString *localPhoto;
+
+-(instancetype)initWithUsername:(NSString*)username caption:(NSString*)caption link:(NSString*)link photoID:(NSString*)photoID localPhoto:(NSString*)localPhoto;
+
+@end
+
 
 @interface KeyboardViewController : UIInputViewController <IGSessionDelegate, NSURLConnectionDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) Instagram *instagram;
+
+@property (strong, nonatomic) NSMutableArray *instagramObjects;
+
 @property (strong, nonatomic) NSMutableArray *instaLinks;
 @property (strong, nonatomic) NSMutableArray *instaNames;
 @property (strong, nonatomic) NSMutableArray *instaText;
+@property (strong, nonatomic) NSMutableArray *instaImageUrls;
 @property (strong, nonatomic) NSMutableArray *photoID;
 @property (strong, nonatomic) NSMutableArray *hearts;
 @property (strong, nonatomic) UIScrollView *instaScrollView;

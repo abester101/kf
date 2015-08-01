@@ -228,6 +228,9 @@
 		ADF4339A1A1F6CEE00134224 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF433951A1F6CEE00134224 /* Instagram.m */; };
 		ADF433A81A1F731200134224 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF433A71A1F731200134224 /* KeyboardViewController.m */; };
 		ADF433AB1A1F731200134224 /* keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADF433A21A1F731200134224 /* keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */; };
+		E727C3061B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
+		E727C3081B6BE97F001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -431,6 +434,9 @@
 		ADF433A71A1F731200134224 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
 		ADF433B01A1F7D7A00134224 /* PicFeed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PicFeed.entitlements; sourceTree = "<group>"; };
 		ADF433B11A1F7E7B00134224 /* picboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = picboard.entitlements; sourceTree = "<group>"; };
+		E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -713,6 +719,9 @@
 				ADF433B11A1F7E7B00134224 /* picboard.entitlements */,
 				ADF433A61A1F731200134224 /* KeyboardViewController.h */,
 				ADF433A71A1F731200134224 /* KeyboardViewController.m */,
+				E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */,
+				E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */,
+				E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */,
 				ADF433A41A1F731200134224 /* Supporting Files */,
 			);
 			path = picboard;
@@ -950,6 +959,7 @@
 				AD6C69A11A53BB4600AB37FC /* keyfeedpage1@2x.png in Resources */,
 				AD6C69A61A53BB6A00AB37FC /* keyfeedinstructions@2x.png in Resources */,
 				AD6C699A1A53B7DE00AB37FC /* hedgehog1.jpg in Resources */,
+				E727C3081B6BE97F001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */,
 				ADF1180C1AA30BFD009094E3 /* ^button@2x.png in Resources */,
 				AD9EA84D1A2663B200DE5DD4 /* background@2x.png in Resources */,
 				AD2839F51A313D7C001D927B /* backspace.png in Resources */,
@@ -1057,6 +1067,7 @@
 				AD6C69A71A53BB6A00AB37FC /* keyfeedinstructions@2x.png in Resources */,
 				AD6C69951A53B7DE00AB37FC /* undersea.jpg in Resources */,
 				AD6C69A01A53BB4600AB37FC /* keyfeedpage1.png in Resources */,
+				E727C3061B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */,
 				AD73C4631A2B89BC006A1BA4 /* background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1172,6 +1183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */,
 				ADDBD8F71AABB4E800566F7F /* Reachability.m in Sources */,
 				ADDBD8F81AABB4E800566F7F /* Reachability.h in Sources */,
 				ADF433A81A1F731200134224 /* KeyboardViewController.m in Sources */,
@@ -1218,6 +1230,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1241,6 +1254,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ted Storey (V5RXZ336VT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1259,6 +1273,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1280,6 +1295,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

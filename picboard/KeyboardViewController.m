@@ -9,13 +9,35 @@
 
 #import "KeyboardViewController.h"
 #import "Heap.h"
+#import "InstagramPhotoCollectionViewCell.h"
 
-@interface KeyboardViewController ()
+@implementation InstagramObject
+
+-(instancetype)initWithUsername:(NSString *)username caption:(NSString *)caption link:(NSString *)link photoID:(NSString *)photoID localPhoto:(NSString *)localPhoto{
+    if(self=[super init]){
+        _username = username;
+        _caption = caption;
+        _link = link;
+        _photoID = photoID;
+        _localPhoto = localPhoto;
+    }
+    return self;
+}
+
+@end
+
+@interface KeyboardViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,InstagramPhotoCollectionViewCellDelegate>
+
 @property (nonatomic, strong) UIButton *nextKeyboardButton;
 @property (nonatomic, strong) NSMutableArray *keyboardButtons;
 @property (nonatomic, strong) NSArray *symbols;
 @property (nonatomic, strong) UILabel *textLabelFullAccess;
 @property (nonatomic, strong) UILabel *textLabelFullAccess2;
+
+@property (strong, nonatomic) UICollectionView *collectionView;
+
+@property (strong, nonatomic) NSString *selfID;
+
 @end
 
 @implementation KeyboardViewController
@@ -43,13 +65,9 @@
 //    [Heap enableVisualizer];
 #endif
     
+    _instagramObjects = [NSMutableArray array];
     
-    // Allocate a reachability object
-    _instaLinks = [NSMutableArray array];
-    _instaNames = [NSMutableArray array];
-    _instaText = [NSMutableArray array];
-    _photoID = [NSMutableArray array];
-    _numberOfImagesAlreadyLoaded = 0;
+    
     
     double width = [[UIScreen mainScreen] bounds].size.width;
     
@@ -120,16 +138,31 @@
     [self.view addConstraints:@[backspaceRightConstraint, backspaceBottomConstraint]];
     [self.view bringSubviewToFront:_backspaceButton];
     
-    _instaScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 180)];
-    _instaScrollView.delegate = self;
-    [self.view addSubview:_instaScrollView];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.minimumInteritemSpacing = 10;
+    layout.sectionInset = UIEdgeInsetsMake(0, 10, 4, 0);
+//    layout.estimatedItemSize = CGSizeMake(140, 180);
+    
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 184) collectionViewLayout:layout];
+
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"InstagramPhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"InstagramPhoto"];
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -1, 0);
+    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.view addSubview:self.collectionView];
+    
     
     if (![self isOpenAccessGranted]) {
         [self displayFullAccessMessage];
     } else {
         Reachability *reach = [Reachability reachabilityWithHostname:@"www.google.com"];
         reach.reachableBlock = ^(Reachability*reach) {
-            NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
+            NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
             if (!sessionKey) {
                 [self displayLoginToInstagramMessage];
             } else {
@@ -186,7 +219,7 @@
 }
 
 - (void)displayLoginToInstagramMessage {
-    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
+    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
     if (!sessionKey) {
         _loggedInInsta = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -260,7 +293,7 @@
 
 - (BOOL)didLikePhoto:(NSString*)mediaID me:(NSString*)myID {
     
-    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
+    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
     NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/media/%@/likes?access_token=%@", mediaID, sessionKey];
     NSURL *urlData = [NSURL URLWithString:url];
     NSError *error;
@@ -279,104 +312,63 @@
     return NO;
 }
 
-- (NSString*)getSelf {
-    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
-    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self?access_token=%@", sessionKey];
-    NSURL *urlData = [NSURL URLWithString:url];
-    NSError *error;
-    NSString *page = [NSString stringWithContentsOfURL:urlData
-                                              encoding:NSASCIIStringEncoding
-                                                 error:&error];
-    NSData *data = [page dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
-                                                                 options:kNilOptions
-                                                                   error:&error];
-    
-    return [[jsonResponse objectForKey:@"data"] objectForKey:@"id"];
+-(NSString*)selfID{
+    if(!_selfID){
+        NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
+        NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self?access_token=%@", sessionKey];
+        NSURL *urlData = [NSURL URLWithString:url];
+        NSError *error;
+        NSString *page = [NSString stringWithContentsOfURL:urlData
+                                                  encoding:NSASCIIStringEncoding
+                                                     error:&error];
+        NSData *data = [page dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+        
+        _selfID = [[jsonResponse objectForKey:@"data"] objectForKey:@"id"];
+    }
+    return _selfID;
 }
 
-- (void)addPhotoButton:(NSString*)nameOfImage {
-    UIButton *instaButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    instaButton.frame = CGRectMake((150 * _numberOfImagesAlreadyLoaded) + 10, 0, 140, 140);
-    [instaButton setBackgroundImage:[UIImage imageNamed:nameOfImage] forState:UIControlStateNormal];
-    [instaButton setTag:_numberOfImagesAlreadyLoaded];
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageButtonPressed:)];
-    singleTap.numberOfTapsRequired = 1;
-    [instaButton addGestureRecognizer:singleTap];
-    
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoLiked:)];
-    doubleTap.numberOfTapsRequired = 2;
-    [instaButton addGestureRecognizer:doubleTap];
-    
-    [singleTap requireGestureRecognizerToFail:doubleTap];
-    UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake((150 * _numberOfImagesAlreadyLoaded) + 10, 140, 120, 16)];
-    textView.text = [_instaNames objectAtIndex:_numberOfImagesAlreadyLoaded];
-    textView.textColor = [UIColor colorWithRed:16/255.0f green:56/255.0f blue:138/255.0f alpha:1.0f];
-    textView.backgroundColor = [UIColor clearColor];
-    textView.font = [UIFont systemFontOfSize:14];
-    
-    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(150 * _numberOfImagesAlreadyLoaded + 5, 160, 120, 20)];
-    description.text = [_instaText objectAtIndex:_numberOfImagesAlreadyLoaded];
-    description.textColor = [UIColor blackColor];
-    [_instaScrollView addSubview:instaButton];
-    [_instaScrollView addSubview:description];
-    [_instaScrollView addSubview:textView];
-    description.font = [UIFont systemFontOfSize:14];
-    [self.view bringSubviewToFront:self.nextKeyboardButton];
-    [self.view sendSubviewToBack:_instaScrollView];
-    _numberOfImagesAlreadyLoaded++;
-}
+
 
 - (void)getSamplePics {
-    [_instaLinks addObject:@"http://instagram.com/p/xMwv8DQ1eT"];
-    [_instaNames addObject:@"biddythehedgehog"];
-    [_instaText addObject:@"Thanks @triciakibler for making me look so good!!! #biddythehedgehog #biddythehedgehogart #ink #watercolor #triciapaints"];
-    [_instaLinks addObject:@"http://instagram.com/p/w6q99qoaJa"];
-    [_instaNames addObject:@"nasa"];
-    [_instaText addObject:@"Holiday Lights on the Sun: The sun emitted a significant solar flare, peaking at 7:28 p.m. EST on Dec. 19, 2014. Our Solar Dynamics Observatory, which watches the sun constantly, captured an image of the event. Solar flares are powerful bursts of radiation. Harmful radiation from a flare cannot pass through Earth's atmosphere to physically affect humans on the ground, however -- when intense enough -- they can disturb the atmosphere in the layer where GPS and communications signals travel. This flare is classified as an X1.8-class flare. X-class denotes the most intense flares, while the number provides more information about its strength. An X2 is twice as intense as an X1, an X3 is three times as intense, etc."];
-    [_instaLinks addObject:@"http://instagram.com/p/wrx-Y5wii3"];
-    [_instaNames addObject:@"whitehouse"];
-    [_instaText addObject:@"President Obama just took action to protect one of our greatest national treasures: Alaska's Bristol Bay."];
-    [_instaLinks addObject:@"http://instagram.com/p/vtWKGmyo9E"];
-    [_instaNames addObject:@"vervecoffee"];
-    [_instaText addObject:@"Nobody inspires adventure and exploration like @chrisburkard . Join us tonight 6/22 6-9pm @sawyersupply as he presents some of his journeys to the Arctic, Tahiti and beyond."];
-    [_instaLinks addObject:@"http://instagram.com/p/w6yu9BPxkk"];
-    [_instaNames addObject:@"santacruzbicycles"];
-    [_instaText addObject:@"Check out this custom #5010CC build from @sohobikeslondon. Highlights include a custom painted 5010CC frame in neon orange, @rockshox suspension and post, XTR Di2 2x11 (single shifter), @chriskingbuzz headset and hubs with @envecomposites M60 rims. Stunning."];
-    [_instaLinks addObject:@"http://instagram.com/p/wuLLrMFZ2x"];
-    [_instaNames addObject:@"santacruzskateboards"];
-    [_instaText addObject:@"Yard Sale! #SantaCruzSkateboards AM Cody Chapman (@coldchapman) snaps an Ollie off of a few recycled goods in the city. 📷:@michaelmcd | @nhs_inc |"];
-    [_instaLinks addObject:@"http://instagram.com/p/vo5dXhJfnl"];
-    [_instaNames addObject:@"ucsc"];
-    [_instaText addObject:@"#TBT Kresge students on a road trip to San Francisco in a classic VW van, circa 1974 #tbtucsc"];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self addPhotoButton:@"hedgehog1.jpg"];
-        [self addPhotoButton:@"gasball.jpg"];
-        [self addPhotoButton:@"whale.jpg"];
-        [self addPhotoButton:@"undersea.jpg"];
-        [self addPhotoButton:@"orange.jpg"];
-        [self addPhotoButton:@"skateboards.jpg"];
-        [self addPhotoButton:@"kresge.jpg"];
-    });
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"biddythehedgehog" caption:@"Thanks @triciakibler for making me look so good!!! #biddythehedgehog #biddythehedgehogart #ink #watercolor #triciapaints" link:@"http://instagram.com/p/xMwv8DQ1eT" photoID:nil localPhoto:@"hedgehog1.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"nasa" caption:@"Holiday Lights on the Sun: The sun emitted a significant solar flare, peaking at 7:28 p.m. EST on Dec. 19, 2014. Our Solar Dynamics Observatory, which watches the sun constantly, captured an image of the event. Solar flares are powerful bursts of radiation. Harmful radiation from a flare cannot pass through Earth's atmosphere to physically affect humans on the ground, however -- when intense enough -- they can disturb the atmosphere in the layer where GPS and communications signals travel. This flare is classified as an X1.8-class flare. X-class denotes the most intense flares, while the number provides more information about its strength. An X2 is twice as intense as an X1, an X3 is three times as intense, etc." link:@"http://instagram.com/p/w6q99qoaJa" photoID:nil localPhoto:@"gasball.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"whitehouse" caption:@"President Obama just took action to protect one of our greatest national treasures: Alaska's Bristol Bay." link:@"http://instagram.com/p/wrx-Y5wii3" photoID:nil localPhoto:@"whale.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"vervecoffee" caption:@"Nobody inspires adventure and exploration like @chrisburkard . Join us tonight 6/22 6-9pm @sawyersupply as he presents some of his journeys to the Arctic, Tahiti and beyond." link:@"http://instagram.com/p/vtWKGmyo9E" photoID:nil localPhoto:@"undersea.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"santacruzbicycles" caption:@"Check out this custom #5010CC build from @sohobikeslondon. Highlights include a custom painted 5010CC frame in neon orange, @rockshox suspension and post, XTR Di2 2x11 (single shifter), @chriskingbuzz headset and hubs with @envecomposites M60 rims. Stunning." link:@"http://instagram.com/p/w6yu9BPxkk" photoID:nil localPhoto:@"orange.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"santacruzskateboards" caption:@"Yard Sale! #SantaCruzSkateboards AM Cody Chapman (@coldchapman) snaps an Ollie off of a few recycled goods in the city. 📷:@michaelmcd | @nhs_inc |" link:@"http://instagram.com/p/wuLLrMFZ2x" photoID:nil localPhoto:@"skateboards.jpg"]];
+    
+    [self.instagramObjects addObject:[[InstagramObject alloc] initWithUsername:@"ucsc" caption:@"#TBT Kresge students on a road trip to San Francisco in a classic VW van, circa 1974 #tbtucsc" link:@"http://instagram.com/p/vo5dXhJfnl" photoID:nil localPhoto:@"kresge.jpg"]];
+    
+    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         self.loadingSpinner.hidden = YES;
         _loadingNewImages = NO;
         _halfFrame = YES;
-        _instaScrollView.contentSize = CGSizeMake(150 * _numberOfImagesAlreadyLoaded, _instaScrollView.contentSize.height);
-        _instaScrollView.frame = CGRectMake(_instaScrollView.frame.size.width/2, 0, _instaScrollView.frame.size.width/2, _instaScrollView.frame.size.height);
+        
+        [self.collectionView reloadData];
+        self.collectionView.frame = CGRectMake(self.view.frame.size.width/2, 0, self.view.frame.size.width/2, self.collectionView.frame.size.height);
     });
 }
 
 - (void)getPicsFromInsta {
     _halfFrame = NO;
     self.loadingSpinner.hidden = NO;
-    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
+    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
     NSLog(@"session key: %@", sessionKey);
     NSString *url;
-    if (_photoID.count > 0) {
-        url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7&max_id=%@", sessionKey, [_photoID lastObject]];
+    if (self.instagramObjects.count > 0) {
+        url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7&max_id=%@", sessionKey, [[self.instagramObjects lastObject] photoID]];
     } else {
         url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7", sessionKey];
     }
@@ -384,103 +376,176 @@
     NSURL *nsurl=[NSURL URLWithString:url];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
+        NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
         NSLog(@"session key: %@", sessionKey);
-        if (sessionKey.length > 0) {
-            NSError *error;
+        if (sessionKey.length) {
+            NSError *error = nil;
             NSString *page = [NSString stringWithContentsOfURL:nsurl
                                                       encoding:NSASCIIStringEncoding
                                                          error:&error];
             NSData *data = [page dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
-                                                                         options:kNilOptions
-                                                                           error:&error];
-            for (id obj in [jsonResponse objectForKey:@"data"]) {
-                [_instaLinks addObject:[obj objectForKey:@"link"]];
-                [_instaNames addObject:[[obj objectForKey:@"user"] objectForKey:@"username"]];
-                if ([obj objectForKey:@"caption"] != [NSNull null]) {
-                    [_instaText addObject:[[obj objectForKey:@"caption"] objectForKey:@"text"]];
-                } else {
-                    [_instaText addObject:@""];
-                }
-                [_photoID addObject:[obj objectForKey:@"id"]];
-                NSString *imageURL = [[[obj objectForKey:@"images"] objectForKey:@"low_resolution"] objectForKey:@"url"];
-                NSString *url2 = imageURL;
-                NSURL *nsurl2=[NSURL URLWithString:url2];
-                NSData *imageData = [NSData dataWithContentsOfURL:nsurl2];
-                UIImage *image = [UIImage imageWithData:imageData];
-                NSString *myID = [self getSelf];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(data){
+                
+                NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
+                                                                             options:kNilOptions
+                                                                               error:&error];
+                for (id obj in [jsonResponse objectForKey:@"data"]) {
                     
-                    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake((150 * _numberOfImagesAlreadyLoaded) + 5, 140, 130, 200)];
+                    InstagramObject *newPhoto = [[InstagramObject alloc] init];
                     
-                    UIButton *instaButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                    instaButton.frame = CGRectMake((150 * _numberOfImagesAlreadyLoaded) + 10, 0, 140, 140);
-                    [instaButton setBackgroundImage:image forState:UIControlStateNormal];
-                    [instaButton setTag:_numberOfImagesAlreadyLoaded];
-                    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageButtonPressed:)];
-                    singleTap.numberOfTapsRequired = 1;
-                    [instaButton addGestureRecognizer:singleTap];
-                    
-                    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoLiked:)];
-                    doubleTap.numberOfTapsRequired = 2;
-                    [instaButton addGestureRecognizer:doubleTap];
-                    
-                    [singleTap requireGestureRecognizerToFail:doubleTap];
-                    UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(5, 8, 120, 16)];
-                    textView.text = [_instaNames objectAtIndex:_numberOfImagesAlreadyLoaded];
-                    textView.textColor = [UIColor colorWithRed:16/255.0f green:56/255.0f blue:138/255.0f alpha:1.0f];
-                    textView.backgroundColor = [UIColor clearColor];
-                    textView.font = [UIFont systemFontOfSize:14];
+                    newPhoto.link = obj[@"link"];
+                    newPhoto.username = obj[@"user"][@"username"];
                     
                     
-                    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(5, 22, 120, 20)];
-                    [description setNumberOfLines:0];
-                    description.font = [UIFont systemFontOfSize:14];
-                    description.text = [_instaText objectAtIndex:_numberOfImagesAlreadyLoaded];
-                    CGSize maximumLabelSize = CGSizeMake(120, FLT_MAX);
-                    
-                    CGSize expectedLabelSize = [description.text sizeWithFont:description.font constrainedToSize:maximumLabelSize lineBreakMode:description.lineBreakMode];
-                    
-                    //adjust the label the the new height.
-                    CGRect newFrame = description.frame;
-                    newFrame.size.height = expectedLabelSize.height;
-                    description.frame = newFrame;
-                    description.textColor = [UIColor blackColor];
-                    [scrollView addSubview:textView];
-                    [scrollView addSubview:description];
-                    [scrollView setFrame:CGRectMake((150 * _numberOfImagesAlreadyLoaded) + 10, 140, 120, 50)];
-                    [scrollView setContentSize:CGSizeMake(120, description.frame.size.height + 35)];
-                    [_instaScrollView addSubview:instaButton];
-                    [_instaScrollView addSubview:scrollView];
-                    if ([self didLikePhoto:[obj objectForKey:@"id"] me:myID]) {
-                        NSLog(@"did like photo");
-                        UIImageView *heart = [[UIImageView alloc] initWithFrame:CGRectMake(instaButton.center.x - 20, instaButton.center.y - 18, 40, 35)];
-                        heart.image = [UIImage imageNamed:@"heart"];
-                        [_instaScrollView addSubview:heart];
-                        [_hearts addObject:heart];
+                    if (obj[@"caption"] != [NSNull null]) {
+                        newPhoto.caption = obj[@"caption"][@"text"];
+                    } else {
+                        newPhoto.caption = @"";
                     }
                     
-                    [self.view bringSubviewToFront:self.nextKeyboardButton];
-                    [self.view sendSubviewToBack:_instaScrollView];
-                    [_instaScrollView bringSubviewToFront:scrollView];
-                    _numberOfImagesAlreadyLoaded++;
-                });
+                    newPhoto.photoID = obj[@"id"];
+                    
+                    newPhoto.photoURLString = obj[@"images"][@"low_resolution"][@"url"];
+                        
+                    newPhoto.liked = [self didLikePhoto:newPhoto.photoID me:self.selfID];
+                    
+                    
+                    [self.instagramObjects addObject:newPhoto];
+                    
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.instagramObjects.count-1 inSection:0]]];
+                    });
+                    
+                }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.loadingSpinner.hidden = YES;
                 _loadingNewImages = NO;
-                _instaScrollView.contentSize = CGSizeMake(150 * _numberOfImagesAlreadyLoaded, _instaScrollView.contentSize.height);
-                for (id heart in _hearts) {
-                    [_instaScrollView addSubview:heart];
-                }
+                
+                [self.collectionView flashScrollIndicators];
+                
             });
         }
     });
 }
 
+#pragma mark - UICollectionViewDataSource Methods
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.instagramObjects.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    InstagramPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InstagramPhoto" forIndexPath:indexPath];
+    
+    cell.delegate = self;
+    
+    [self configureCell:cell forIndexPath:indexPath];
+    
+    return cell;
+}
+
+-(void)configureCell:(InstagramPhotoCollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath{
+    
+    InstagramObject *object = self.instagramObjects[indexPath.item];
+    
+    NSMutableAttributedString *descriptionString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    [descriptionString appendAttributedString:[[NSAttributedString alloc] initWithString:object.username attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:16/255.0f green:56/255.0f blue:138/255.0f alpha:1.0f],NSFontAttributeName:[UIFont systemFontOfSize:14]}]];
+    
+    [descriptionString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    
+    [descriptionString appendAttributedString:[[NSAttributedString alloc] initWithString:object.caption attributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:14]}]];
+    
+    cell.textView.attributedText = descriptionString;
+    
+    if(object.photoURLString.length){
+        [cell loadImageFromURLString:object.photoURLString];
+    } else if(object.localPhoto.length){
+        [cell.imageView setImage:[UIImage imageNamed:object.localPhoto]];
+    }
+    
+    cell.heartImageView.hidden = !object.liked;
+    
+}
+
+#pragma mark - UICollectionViewDelegate Methods
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout Methods
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)collectionViewLayout;
+    
+    return CGSizeMake(140, collectionView.frame.size.height - flowLayout.sectionInset.top - flowLayout.sectionInset.bottom);
+}
+
+#pragma mark - InstagramPhotoCollectionViewCellDelegate Methods
+
+-(void)photoCellDidTapPhoto:(InstagramPhotoCollectionViewCell *)cell{
+    
+    InstagramObject *object = self.instagramObjects[[self.collectionView indexPathForCell:cell].item];
+    
+    if(object){
+        [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", object.link, PROMO_TEXT]];
+    }
+    
+    [self imageButtonPressed:nil];
+}
+
+-(void)photoCellDidDoubleTapPhoto:(InstagramPhotoCollectionViewCell *)cell{
+    
+    InstagramObject *object = self.instagramObjects[[self.collectionView indexPathForCell:cell].item];
+    if(object){
+        
+        cell.heartImageView.hidden = NO;
+        
+        //curl -F 'access_token=ACCESS-TOKEN' \
+        //https://api.instagram.com/v1/media/{media-id}/likes
+        
+        NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/media/%@/likes", object.photoID]]];
+        
+        request.HTTPMethod = @"POST";
+        NSString *post = [NSString stringWithFormat:@"access_token=%@", sessionKey];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        if(conn) {
+            NSLog(@"Connection Successful");
+            object.liked = YES;
+        } else {
+            NSLog(@"Connection could not be made");
+        }
+    
+    }
+    
+    [self photoLiked:nil];
+    
+    
+}
+
+-(void)photoCellDidLongPressPhoto:(InstagramPhotoCollectionViewCell *)cell{
+//    NSLog(@"Long press");
+}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == _instaScrollView) {
+    if (scrollView == self.collectionView) {
         if (_reachable) {
             if (scrollView.contentOffset.x > (scrollView.contentSize.width - self.view.frame.size.width)) {
                 [self loadMoreImages];
@@ -497,81 +562,69 @@
 }
 
 - (void)imageButtonPressed:(id)sender {
-    UIButton *button = (UIButton*)[sender view];
-    NSInteger tag = button.tag;
-    NSLog(@"image pressed with tag: %ld", (long)tag);
-    [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", [_instaLinks objectAtIndex:tag], PROMO_TEXT]];
+    // Still here for legacy logging purposes
 }
 
 - (void)photoLiked:(id)sender {
-    UIButton *button = (UIButton*)[sender view];
-    UIImageView *heart = [[UIImageView alloc] initWithFrame:CGRectMake(button.center.x - 20, button.center.y - 18, 40, 35)];
-    heart.image = [UIImage imageNamed:@"heart"];
-    [_instaScrollView addSubview:heart];
-    
-    NSInteger tag = button.tag;
-    NSLog(@"photo liked with tag: %ld", (long)tag);
-    
-    //curl -F 'access_token=ACCESS-TOKEN' \
-    //https://api.instagram.com/v1/media/{media-id}/likes
-
-    NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:@"group.KeyFeed.KeyFeed"] objectForKey:@"accessToken"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/media/%@/likes", [_photoID objectAtIndex:tag]]]];
-    
-    request.HTTPMethod = @"POST";
-    NSString *post = [NSString stringWithFormat:@"access_token=%@", sessionKey];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-    if(conn) {
-        NSLog(@"Connection Successful");
-    } else {
-        NSLog(@"Connection could not be made");
-    }
-
+    // Still here for legacy logging purposes
 }
 
+
 - (void)portrait {
-    double width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGRect scrollFrame;
     if (_halfFrame) {
-        scrollFrame.origin = _instaScrollView.frame.origin;
-        scrollFrame.origin.x = width/2;
-        scrollFrame.size = CGSizeMake(self.view.frame.size.width, 180);
+        scrollFrame.origin = self.collectionView.frame.origin;
+        scrollFrame.origin.x = self.view.frame.size.width/2;
+        scrollFrame.size = CGSizeMake(self.view.frame.size.width/2, 184);
         _textLabelFullAccess.frame = CGRectMake(12, 125, (width/2)-6, 80);
     } else {
-        scrollFrame.origin = _instaScrollView.frame.origin;
-        scrollFrame.size = CGSizeMake(self.view.frame.size.width, 180);
+        scrollFrame.origin = self.collectionView.frame.origin;
+        scrollFrame.size = CGSizeMake(self.view.frame.size.width, 184);
     }
-    _instaScrollView.contentSize = CGSizeMake(_instaScrollView.contentSize.width, 180);
-    _instaScrollView.frame = scrollFrame;
+    
+    
+    self.collectionView.frame = scrollFrame;
+    [self.collectionView performBatchUpdates:^{
+        
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
 }
 
 - (void)landscape {
-    double width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat width = self.view.frame.size.width;
     CGRect scrollFrame;
     if (_halfFrame) {
-        scrollFrame.origin = _instaScrollView.frame.origin;
-        scrollFrame.size = CGSizeMake(self.view.frame.size.width, 125);
-        scrollFrame.origin.x = width/2;
-        _textLabelFullAccess.frame = CGRectMake(168, 0, (width/4)-18, 80);
+        scrollFrame.origin = self.collectionView.frame.origin;
+        scrollFrame.size = CGSizeMake(self.view.frame.size.width/2, 125);
+        scrollFrame.origin.x = self.view.frame.size.width/2;
+        _textLabelFullAccess.frame = CGRectMake(self.view.frame.size.width/2-((width/4)-18), 0, (width/4)-18, 80);
     } else {
-        scrollFrame.origin = _instaScrollView.frame.origin;
+        scrollFrame.origin = self.collectionView.frame.origin;
         scrollFrame.size = CGSizeMake(self.view.frame.size.width, 125);
     }
-    _instaScrollView.contentSize = CGSizeMake(_instaScrollView.contentSize.width, 125);
-    _instaScrollView.frame = scrollFrame;
+    
+    self.collectionView.frame = scrollFrame;
+    [self.collectionView performBatchUpdates:^{
+        
+        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 -(void)viewDidLayoutSubviews {
-    if (self.view.frame.size.width == ([[UIScreen mainScreen] bounds].size.width*([[UIScreen mainScreen] bounds].size.width<[[UIScreen mainScreen] bounds].size.height))+([[UIScreen mainScreen] bounds].size.height*([[UIScreen mainScreen] bounds].size.width>[[UIScreen mainScreen] bounds].size.height))) {
-        [self portrait];
-    } else {
-        [self landscape];
-    }
+        if (self.view.frame.size.width == ([[UIScreen mainScreen] bounds].size.width*([[UIScreen mainScreen] bounds].size.width<[[UIScreen mainScreen] bounds].size.height))+([[UIScreen mainScreen] bounds].size.height*([[UIScreen mainScreen] bounds].size.width>[[UIScreen mainScreen] bounds].size.height))) {
+            [self portrait];
+        } else {
+            [self landscape];
+        }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
