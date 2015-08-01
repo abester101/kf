@@ -40,7 +40,7 @@
 
 @property (strong, nonatomic) Instagram *instagram;
 
-@property (strong, nonatomic) NSMutableArray *instagramObjects;
+@property (strong, nonatomic) NSMutableOrderedSet *instagramObjects;
 
 @property (strong, nonatomic) NSMutableArray *instaLinks;
 @property (strong, nonatomic) NSMutableArray *instaNames;

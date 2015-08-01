@@ -11,6 +11,8 @@
 #import "Heap.h"
 #import "InstagramPhotoCollectionViewCell.h"
 
+#define IsEqual(x,y) ((x&&y&&[x isEqual:y])||(!x&&!y)||x==y)
+
 @implementation InstagramObject
 
 -(instancetype)initWithUsername:(NSString *)username caption:(NSString *)caption link:(NSString *)link photoID:(NSString *)photoID localPhoto:(NSString *)localPhoto{
@@ -22,6 +24,15 @@
         _localPhoto = localPhoto;
     }
     return self;
+}
+
+- (NSUInteger)hash {
+    return [self.link hash];
+}
+
+-(BOOL)isEqual:(id)object{
+    InstagramObject *obj = object;
+    return [object isKindOfClass:[self class]] && IsEqual(self.username,obj.username) && IsEqual(self.caption, obj.caption) && IsEqual(self.link, obj.link) && IsEqual(self.photoID, obj.photoID) && IsEqual(self.localPhoto, obj.localPhoto);
 }
 
 @end
@@ -37,6 +48,8 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 @property (strong, nonatomic) NSString *selfID;
+
+@property (assign, nonatomic) BOOL didFirstLoad;
 
 @end
 
@@ -65,7 +78,7 @@
 //    [Heap enableVisualizer];
 #endif
     
-    _instagramObjects = [NSMutableArray array];
+    _instagramObjects = [NSMutableOrderedSet orderedSet];
     
     
     
@@ -156,6 +169,7 @@
     self.collectionView.delegate = self;
     [self.view addSubview:self.collectionView];
     
+    self.didFirstLoad = NO;
     
     if (![self isOpenAccessGranted]) {
         [self displayFullAccessMessage];
@@ -172,7 +186,10 @@
                     for (UIButton *button in _keyboardButtons) {
                         button.hidden = YES;
                     }
-                    [self getPicsFromInsta];
+                    if(!_loadingNewImages){
+                        _loadingNewImages = YES;
+                        [self getPicsFromInsta];
+                    }
                     _reachable = YES;
                 }
             }
@@ -365,7 +382,7 @@
     _halfFrame = NO;
     self.loadingSpinner.hidden = NO;
     NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
-    NSLog(@"session key: %@", sessionKey);
+//    NSLog(@"session key: %@", sessionKey);
     NSString *url;
     if (self.instagramObjects.count > 0) {
         url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7&max_id=%@", sessionKey, [[self.instagramObjects lastObject] photoID]];
@@ -377,7 +394,7 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
-        NSLog(@"session key: %@", sessionKey);
+//        NSLog(@"session key: %@", sessionKey);
         if (sessionKey.length) {
             NSError *error = nil;
             NSString *page = [NSString stringWithContentsOfURL:nsurl
@@ -411,16 +428,21 @@
                     newPhoto.liked = [self didLikePhoto:newPhoto.photoID me:self.selfID];
                     
                     
-                    [self.instagramObjects addObject:newPhoto];
+                    if(![self.instagramObjects containsObject:newPhoto]){
+                        [self.instagramObjects addObject:newPhoto];
                     
                     
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.instagramObjects.count-1 inSection:0]]];
-                    });
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.instagramObjects.count-1 inSection:0]]];
+                        });
+                    }
+                    
+                    
                     
                 }
             }
+            _didFirstLoad = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.loadingSpinner.hidden = YES;
                 _loadingNewImages = NO;
@@ -556,7 +578,7 @@
 }
 
 - (void)loadMoreImages {
-    if (!_loadingNewImages) {
+    if (!_loadingNewImages&&_didFirstLoad) {
         _loadingNewImages = YES;
         [self getPicsFromInsta];
     }
