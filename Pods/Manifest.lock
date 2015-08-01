@@ -1,13 +1,28 @@
 PODS:
+  - Adjust (4.2.7):
+    - Adjust/Core (= 4.2.7)
+  - Adjust/Core (4.2.7)
   - Heap (2.1.5)
   - Masonry (0.6.1)
 
 DEPENDENCIES:
+  - Adjust (from `git://github.com/adjust/ios_sdk.git`, tag `v4.2.7`)
   - Heap
   - Masonry
 
+EXTERNAL SOURCES:
+  Adjust:
+    :git: git://github.com/adjust/ios_sdk.git
+    :tag: v4.2.7
+
+CHECKOUT OPTIONS:
+  Adjust:
+    :git: git://github.com/adjust/ios_sdk.git
+    :tag: v4.2.7
+
 SPEC CHECKSUMS:
+  Adjust: 2c3d4db6047c6bba68d7c5ede63fbdc989eb57b7
   Heap: 9d41b3d07bc86c9127364b638c710d854390a113
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.38.2

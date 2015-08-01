@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Adjust.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-KeyFeed.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-KeyFeedKeyboard.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D991E7647338654F8B2E4C7467E824B</key>
+		<key>1489BE8830FBA413AF5072A8151CC5A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>558983C4F4C2A54E91BD7C23D0C56AA4</key>
+		<key>30D4EA97E408211261686359D1328408</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BA27462B055ACFCD89EB89247753044</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CFD35C30069B8BD65CA7F08C026D368B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

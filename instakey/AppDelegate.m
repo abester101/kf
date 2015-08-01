@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Heap.h"
+#import "Adjust.h"
 
 @interface AppDelegate ()
 
@@ -26,6 +27,17 @@
 #ifdef DEBUG
     [Heap enableVisualizer];
 #endif
+    
+    
+    NSString *yourAppToken = @"cd88grm7wgfc";
+#ifdef DEBUG
+    NSString *environment = ADJEnvironmentSandbox;
+#else
+    NSString *environment = ADJEnvironmentProduction;
+#endif
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken
+                                                environment:environment];
+    [Adjust appDidLaunch:adjustConfig];
 
     return YES;
 }
