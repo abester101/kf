@@ -466,6 +466,7 @@
     [descriptionString appendAttributedString:[[NSAttributedString alloc] initWithString:object.caption attributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:14]}]];
     
     cell.textView.attributedText = descriptionString;
+    cell.textView.contentOffset = CGPointMake(0,0);
     
     if(object.photoURLString.length){
         [cell loadImageFromURLString:object.photoURLString];

@@ -18,6 +18,7 @@
 
 -(void)prepareForReuse{
     [super prepareForReuse];
+    self.textView.contentOffset = CGPointMake(0,0);
     self.textView.text = nil;
     self.imageView.image = nil;
     self.heartImageView.hidden = YES;
