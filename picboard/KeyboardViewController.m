@@ -101,12 +101,7 @@
     
     [Fabric with:@[CrashlyticsKit]];
     
-    [Heap setAppId:@"727469615"];
-    
-    // Visualizer can't be enabled in keyboard extension
-#ifdef DEBUG
-//    [Heap enableVisualizer];
-#endif
+
     
     _instagramObjects = [NSMutableOrderedSet orderedSet];
     
@@ -205,6 +200,13 @@
     } else {
         Reachability *reach = [Reachability reachabilityWithHostname:@"www.google.com"];
         reach.reachableBlock = ^(Reachability*reach) {
+            
+            [Heap setAppId:@"727469615"];
+            
+#ifdef DEBUG
+            [Heap startDebug];
+#endif
+            
             NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
             if (!sessionKey) {
                 [self displayLoginToInstagramMessage];
@@ -245,6 +247,9 @@
         };
         [reach startNotifier];
     }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 
 - (void)displayFullAccessMessage {
@@ -440,40 +445,52 @@
                 NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:kNilOptions
                                                                                error:&error];
-                for (id obj in [jsonResponse objectForKey:@"data"]) {
-                    
-                    InstagramObject *newPhoto = [[InstagramObject alloc] init];
-                    
-                    newPhoto.link = obj[@"link"];
-                    newPhoto.username = obj[@"user"][@"username"];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
                     
                     
-                    if (obj[@"caption"] != [NSNull null]) {
-                        newPhoto.caption = obj[@"caption"][@"text"];
-                    } else {
-                        newPhoto.caption = @"";
-                    }
-                    
-                    newPhoto.photoID = obj[@"id"];
-                    
-                    newPhoto.photoURLString = obj[@"images"][@"low_resolution"][@"url"];
+                    [self.collectionView performBatchUpdates:^{
+                        for (id obj in [jsonResponse objectForKey:@"data"]) {
+                            
+                            InstagramObject *newPhoto = [[InstagramObject alloc] init];
+                            
+                            newPhoto.link = obj[@"link"];
+                            newPhoto.username = obj[@"user"][@"username"];
+                            
+                            
+                            if (obj[@"caption"] != [NSNull null]) {
+                                newPhoto.caption = obj[@"caption"][@"text"];
+                            } else {
+                                newPhoto.caption = @"";
+                            }
+                            
+                            newPhoto.photoID = obj[@"id"];
+                            
+                            newPhoto.photoURLString = obj[@"images"][@"low_resolution"][@"url"];
+                            
+                            if(obj[@"user_has_liked"]&&![obj[@"user_has_liked"] isKindOfClass:[NSNull class]]){
+                                newPhoto.liked = [obj[@"user_has_liked"] boolValue];
+                            } else {
+                                newPhoto.liked = [self didLikePhoto:newPhoto.photoID me:self.selfID];
+                            }
+                            
+                            
+                            if(![self.instagramObjects containsObject:newPhoto]){
+                                [self.instagramObjects addObject:newPhoto];
+                                
+                                
+                                [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.instagramObjects.count-1 inSection:0]]];
+                                
+                                
+                            }
+                        }
+                    } completion:^(BOOL finished) {
                         
-                    newPhoto.liked = [self didLikePhoto:newPhoto.photoID me:self.selfID];
+                    }];
                     
                     
-                    if(![self.instagramObjects containsObject:newPhoto]){
-                        [self.instagramObjects addObject:newPhoto];
-                    
-                    
-                    
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.instagramObjects.count-1 inSection:0]]];
-                        });
-                    }
-                    
-                    
-                    
-                }
+                });
+                
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.loadingSpinner.hidden = YES;
@@ -556,7 +573,6 @@
         [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", object.link, PROMO_TEXT]];
     }
     
-    [self imageButtonPressed:nil];
 }
 
 -(void)photoCellDidDoubleTapPhoto:(InstagramPhotoCollectionViewCell *)cell{
@@ -589,8 +605,6 @@
     
     }
     
-    [self photoLiked:nil];
-    
     
 }
 
@@ -616,14 +630,6 @@
     }
 }
 
-- (void)imageButtonPressed:(id)sender {
-    // Still here for legacy logging purposes
-}
-
-- (void)photoLiked:(id)sender {
-    // Still here for legacy logging purposes
-}
-
 
 - (void)portrait {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
@@ -638,14 +644,19 @@
         scrollFrame.size = CGSizeMake(self.view.frame.size.width, 184);
     }
     
-    
     self.collectionView.frame = scrollFrame;
-    [self.collectionView performBatchUpdates:^{
+    
+    @try{
+        [self.collectionView performBatchUpdates:^{
+        } completion:^(BOOL finished) {
+            
+        }];
+    } @catch (NSException *exception) {
         
+    } @finally {
         
-    } completion:^(BOOL finished) {
-        
-    }];
+    }
+    
     
     
 }
@@ -664,12 +675,15 @@
     }
     
     self.collectionView.frame = scrollFrame;
-    [self.collectionView performBatchUpdates:^{
+    @try{
+        [self.collectionView performBatchUpdates:^{
+        } completion:^(BOOL finished) {
+        }];
+    } @catch (NSException *exception) {
         
+    } @finally {
         
-    } completion:^(BOOL finished) {
-        
-    }];
+    }
 }
 
 -(void)viewDidLayoutSubviews {
