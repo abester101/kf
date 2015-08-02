@@ -347,12 +347,16 @@
                                               encoding:NSASCIIStringEncoding
                                                  error:&error];
     NSData *data = [page dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
-                                                                 options:kNilOptions
-                                                                   error:&error];
-    for (id user in [jsonResponse objectForKey:@"data"]) {
-        if (![user[@"id"] isKindOfClass:[NSNull class]]&&[[user objectForKey:@"id"] isEqualToString:myID]) {
-            return YES;
+    if(data&&!error){
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+        if(!error){
+            for (id user in [jsonResponse objectForKey:@"data"]) {
+                if (![user[@"id"] isKindOfClass:[NSNull class]]&&[[user objectForKey:@"id"] isEqualToString:myID]) {
+                    return YES;
+                }
+            }
         }
     }
     return NO;
@@ -431,7 +435,7 @@
                                                          error:&error];
             NSData *data = [page dataUsingEncoding:NSUTF8StringEncoding];
             
-            if(data){
+            if(data&&!error){
                 
                 NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:kNilOptions
