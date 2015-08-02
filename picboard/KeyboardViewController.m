@@ -26,8 +26,40 @@
     return self;
 }
 
+-(void)setUsername:(NSString *)username{
+    if(![username isKindOfClass:[NSNull class]]){
+        _username = username;
+    }
+}
+-(void)setCaption:(NSString *)caption{
+    if(![caption isKindOfClass:[NSNull class]]){
+        _caption = caption;
+    }
+}
+-(void)setLink:(NSString *)link{
+    if(![link isKindOfClass:[NSNull class]]){
+        _link = link;
+    }
+}
+-(void)setPhotoID:(NSString *)photoID{
+    if(![photoID isKindOfClass:[NSNull class]]){
+        _photoID = photoID;
+    }
+}
+-(void)setLocalPhoto:(NSString *)localPhoto{
+    if(![localPhoto isKindOfClass:[NSNull class]]){
+        _localPhoto = localPhoto;
+    }
+}
+
 - (NSUInteger)hash {
-    return [self.link hash];
+    if(self.link.length){
+        return [self.link hash];
+    } else if(self.username.length){
+        return [self.username hash];
+    } else {
+        return [super hash];
+    }
 }
 
 -(BOOL)isEqual:(id)object{
@@ -48,8 +80,6 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 @property (strong, nonatomic) NSString *selfID;
-
-@property (assign, nonatomic) BOOL didFirstLoad;
 
 @end
 
@@ -169,7 +199,6 @@
     self.collectionView.delegate = self;
     [self.view addSubview:self.collectionView];
     
-    self.didFirstLoad = NO;
     
     if (![self isOpenAccessGranted]) {
         [self displayFullAccessMessage];
@@ -322,7 +351,7 @@
                                                                  options:kNilOptions
                                                                    error:&error];
     for (id user in [jsonResponse objectForKey:@"data"]) {
-        if ([[user objectForKey:@"id"] isEqualToString:myID]) {
+        if (![user[@"id"] isKindOfClass:[NSNull class]]&&[[user objectForKey:@"id"] isEqualToString:myID]) {
             return YES;
         }
     }
@@ -442,7 +471,6 @@
                     
                 }
             }
-            _didFirstLoad = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.loadingSpinner.hidden = YES;
                 _loadingNewImages = NO;
@@ -578,7 +606,7 @@
 }
 
 - (void)loadMoreImages {
-    if (!_loadingNewImages&&_didFirstLoad) {
+    if (!_loadingNewImages) {
         _loadingNewImages = YES;
         [self getPicsFromInsta];
     }
