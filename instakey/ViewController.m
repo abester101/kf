@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    [self.view addGestureRecognizer:gr];
+//    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+//    [self.view addGestureRecognizer:gr];
     // if not using ARC, you should [gr release];
     // mySensitiveRect coords are in the coordinate system of self.view
 }
@@ -59,12 +59,20 @@
 }
 
 - (void)didLogin {
+    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
     UIViewController *controller = (UIViewController*)[mainStoryboard
                                                        instantiateViewControllerWithIdentifier:@"howtoinstall"];
-    [self presentViewController:controller animated:YES completion:nil];
-    NSLog(@"will present other view controller");
+    
+    if(self.presentedViewController){
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self presentViewController:controller animated:YES completion:nil];
+        }];
+    } else {
+        [self presentViewController:controller animated:YES completion:nil];
+        NSLog(@"will present other view controller");
+    }
 }
 
 -(void)igDidLogin {
@@ -89,6 +97,12 @@
     } else {
         message = @"Access denied!";
     }
+    if(self.presentedViewController){
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+    
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                         message:message
                                                        delegate:nil

@@ -232,6 +232,8 @@
 		E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */; };
 		E727C3061B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
 		E727C3081B6BE97F001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
+		E7B5F4011B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */; };
+		E7B5F4041B7E95FF00935AC8 /* keyfeedload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B5F4031B7E95FF00935AC8 /* keyfeedload@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -442,6 +444,9 @@
 		E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		E7B5F3FF1B7E8A7F00935AC8 /* InstagramAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramAuthenticationViewController.h; sourceTree = "<group>"; };
+		E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramAuthenticationViewController.m; sourceTree = "<group>"; };
+		E7B5F4031B7E95FF00935AC8 /* keyfeedload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyfeedload@3x.png"; sourceTree = "<group>"; };
 		F987E0793573EA394C864875 /* Pods-KeyFeedKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeyFeedKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeyFeedKeyboard/Pods-KeyFeedKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -507,6 +512,7 @@
 				AD2709671A63862100F53D0E /* KeyFeed4.png */,
 				AD2709601A6334E500F53D0E /* keyfeedload.png */,
 				AD2709611A6334E500F53D0E /* keyfeedload@2x.png */,
+				E7B5F4031B7E95FF00935AC8 /* keyfeedload@3x.png */,
 				AD6C69B41A5697BF00AB37FC /* kficon120@2x.png */,
 				AD6C69A91A56977700AB37FC /* kficon152@2x.png */,
 				AD6C69AA1A56977700AB37FC /* kficon76.png */,
@@ -654,6 +660,8 @@
 				ADF433701A1F6C8D00134224 /* ViewController.h */,
 				ADF433711A1F6C8D00134224 /* ViewController.m */,
 				ADF433731A1F6C8D00134224 /* Main.storyboard */,
+				E7B5F3FF1B7E8A7F00935AC8 /* InstagramAuthenticationViewController.h */,
+				E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */,
 				ADF433761A1F6C8D00134224 /* Images.xcassets */,
 				ADF433781A1F6C8D00134224 /* LaunchScreen.xib */,
 				ADF433691A1F6C8D00134224 /* Supporting Files */,
@@ -928,6 +936,7 @@
 				ADF117C51AA2504C009094E3 /* twobutton.png in Resources */,
 				AD73C46A1A2BCA9A006A1BA4 /* sampleicon1@2x.png in Resources */,
 				AD6C69981A53B7DE00AB37FC /* gasball.jpg in Resources */,
+				E7B5F4041B7E95FF00935AC8 /* keyfeedload@3x.png in Resources */,
 				AD9EA8511A2B829600DE5DD4 /* backbutton@2x.png in Resources */,
 				ADF118171AA30BFD009094E3 /* [button.png in Resources */,
 				AD27097B1A6391B700F53D0E /* KF_HowToInstall@2x.png in Resources */,
@@ -1188,6 +1197,7 @@
 				ADF4336C1A1F6C8D00134224 /* main.m in Sources */,
 				ADF433991A1F6CEE00134224 /* IGRequest.m in Sources */,
 				AD27097F1A639D6A00F53D0E /* TroubleshootingViewController.m in Sources */,
+				E7B5F4011B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

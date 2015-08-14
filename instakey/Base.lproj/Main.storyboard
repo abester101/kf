@@ -54,6 +54,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="8uI-Qt-dda" secondAttribute="centerX" id="2VE-Ar-jNS"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8uI-Qt-dda" secondAttribute="trailing" id="3Xt-QX-plW"/>
@@ -62,9 +63,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8uI-Qt-dda" secondAttribute="bottom" id="LG1-Zo-2Lb"/>
                             <constraint firstAttribute="centerY" secondItem="8uI-Qt-dda" secondAttribute="centerY" id="d9x-qA-T1A"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="dcv-QP-6vo" appends="YES" id="NWS-Rg-hfK"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="dcv-QP-6vo">
+                    <connections>
+                        <segue destination="0xK-om-Kd2" kind="presentation" identifier="InstagramAuthenticationSegue" modalPresentationStyle="formSheet" id="Vpa-bW-xrv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1042" y="207"/>
         </scene>
@@ -343,6 +352,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT7-rB-iPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1547" y="968"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="obr-xV-7Hl">
+            <objects>
+                <navigationController id="0xK-om-Kd2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6cf-Jx-8gF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1Yx-bx-hHi" kind="relationship" relationship="rootViewController" id="0xa-NC-Ksv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PdR-yt-sRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="1651"/>
+        </scene>
+        <!--Connect to Instagram-->
+        <scene sceneID="G55-IH-HeY">
+            <objects>
+                <viewController id="1Yx-bx-hHi" customClass="InstagramAuthenticationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uAb-J7-R7F"/>
+                        <viewControllerLayoutGuide type="bottom" id="wHN-0H-0vJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vrg-wk-hs1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNH-az-68d">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1Yx-bx-hHi" id="UBm-0R-5EC"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RNH-az-68d" firstAttribute="leading" secondItem="vrg-wk-hs1" secondAttribute="leading" id="1LS-RX-4PM"/>
+                            <constraint firstAttribute="trailing" secondItem="RNH-az-68d" secondAttribute="trailing" id="Bm9-kP-HW7"/>
+                            <constraint firstItem="RNH-az-68d" firstAttribute="top" secondItem="vrg-wk-hs1" secondAttribute="topMargin" id="YJt-jf-hDG"/>
+                            <constraint firstItem="wHN-0H-0vJ" firstAttribute="top" secondItem="RNH-az-68d" secondAttribute="bottom" id="x5d-sE-scO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Connect to Instagram" id="QZ6-7P-pKq">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="kOS-4o-vPS">
+                            <connections>
+                                <action selector="tapCancel:" destination="1Yx-bx-hHi" id="KmO-XS-BJr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" width="33" style="plain" id="w98-nL-meJ">
+                            <view key="customView" contentMode="scaleToFill" id="GOe-LB-SlW">
+                                <rect key="frame" x="540" y="5" width="33" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hev-W7-HqJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="33"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hev-W7-HqJ" firstAttribute="leading" secondItem="GOe-LB-SlW" secondAttribute="leading" id="4Uf-al-rkd"/>
+                                    <constraint firstAttribute="bottom" secondItem="hev-W7-HqJ" secondAttribute="bottom" id="HeA-Hf-vMw"/>
+                                    <constraint firstAttribute="trailing" secondItem="hev-W7-HqJ" secondAttribute="trailing" id="M3g-IH-n2N"/>
+                                    <constraint firstItem="hev-W7-HqJ" firstAttribute="top" secondItem="GOe-LB-SlW" secondAttribute="top" id="VNK-Oa-Va6"/>
+                                </constraints>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="hev-W7-HqJ" id="Vpi-zc-jGE"/>
+                        <outlet property="webView" destination="RNH-az-68d" id="Fcr-4h-f3G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ml-4n-TKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1523" y="1651"/>
         </scene>
     </scenes>
     <resources>

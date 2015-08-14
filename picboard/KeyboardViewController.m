@@ -571,6 +571,8 @@
     
     if(object){
         [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", object.link, PROMO_TEXT]];
+        
+        [Heap track:@"Send Photo Link"];
     }
     
 }
@@ -603,6 +605,7 @@
             NSLog(@"Connection could not be made");
         }
     
+        [Heap track:@"Like Photo"];
     }
     
     
@@ -627,6 +630,7 @@
     if (!_loadingNewImages) {
         _loadingNewImages = YES;
         [self getPicsFromInsta];
+        [Heap track:@"Load More Images"];
     }
 }
 
