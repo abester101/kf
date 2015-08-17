@@ -152,9 +152,13 @@
     [self.view bringSubviewToFront:self.loadingSpinner];
     [self.view addConstraints:@[centerXConstraint, spinnerBottomConstraint]];
     
-    _backspaceButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 21)];
+    _backspaceButton = [[RepeatingButton alloc] initWithFrame:CGRectMake(0, 0, 36, 21)];
     [_backspaceButton setBackgroundImage:[UIImage imageNamed:@"backspace"] forState:UIControlStateNormal];
-    [_backspaceButton addTarget:self action:@selector(backspacePressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [_backspaceButton addTarget:self action:@selector(backspacePressed:) forControlEvents:UIControlEventTouchUpInside];
+    _backspaceButton.repeatTarget = self;
+    _backspaceButton.repeatTargetAction = @selector(backspacePressed:);
+    _backspaceButton.autorepeatStartDelay = 0.7f;
+    _backspaceButton.autorepeatPressDelay = 0.17f;
     [_backspaceButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:_backspaceButton];
     

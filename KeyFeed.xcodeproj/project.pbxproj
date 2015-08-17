@@ -232,6 +232,8 @@
 		E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */; };
 		E727C3061B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
 		E727C3081B6BE97F001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
+		E7A89F721B825D370070C687 /* RepeatingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A89F711B825D370070C687 /* RepeatingButton.m */; };
+		E7A89F731B825D370070C687 /* RepeatingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A89F711B825D370070C687 /* RepeatingButton.m */; };
 		E7B5F4011B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */; };
 		E7B5F4041B7E95FF00935AC8 /* keyfeedload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B5F4031B7E95FF00935AC8 /* keyfeedload@3x.png */; };
 /* End PBXBuildFile section */
@@ -444,6 +446,8 @@
 		E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		E7A89F701B825D370070C687 /* RepeatingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatingButton.h; sourceTree = "<group>"; };
+		E7A89F711B825D370070C687 /* RepeatingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatingButton.m; sourceTree = "<group>"; };
 		E7B5F3FF1B7E8A7F00935AC8 /* InstagramAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramAuthenticationViewController.h; sourceTree = "<group>"; };
 		E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramAuthenticationViewController.m; sourceTree = "<group>"; };
 		E7B5F4031B7E95FF00935AC8 /* keyfeedload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyfeedload@3x.png"; sourceTree = "<group>"; };
@@ -739,6 +743,8 @@
 				E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */,
 				E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */,
 				E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */,
+				E7A89F701B825D370070C687 /* RepeatingButton.h */,
+				E7A89F711B825D370070C687 /* RepeatingButton.m */,
 				ADF433A41A1F731200134224 /* Supporting Files */,
 			);
 			path = picboard;
@@ -1198,6 +1204,7 @@
 				ADF433991A1F6CEE00134224 /* IGRequest.m in Sources */,
 				AD27097F1A639D6A00F53D0E /* TroubleshootingViewController.m in Sources */,
 				E7B5F4011B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m in Sources */,
+				E7A89F721B825D370070C687 /* RepeatingButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,6 +1216,7 @@
 				ADDBD8F71AABB4E800566F7F /* Reachability.m in Sources */,
 				ADDBD8F81AABB4E800566F7F /* Reachability.h in Sources */,
 				ADF433A81A1F731200134224 /* KeyboardViewController.m in Sources */,
+				E7A89F731B825D370070C687 /* RepeatingButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

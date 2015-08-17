@@ -19,6 +19,8 @@
 #define APP_ID @"4efbf1dd9a1b4a058a4c3772876d9400"
 #define PROMO_TEXT @"\n\nSent via KeyFeed - www.apple.co/1DbnRU3"
 
+#import "RepeatingButton.h"
+
 
 @interface InstagramObject : NSObject
 
@@ -50,7 +52,7 @@
 @property (strong, nonatomic) NSMutableArray *hearts;
 @property (strong, nonatomic) UIScrollView *instaScrollView;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
-@property (strong, nonatomic) UIButton *backspaceButton;
+@property (strong, nonatomic) RepeatingButton *backspaceButton;
 @property (nonatomic) BOOL loggedInInsta;
 @property (nonatomic) BOOL reachable;
 @property (nonatomic) BOOL loadingNewImages;
