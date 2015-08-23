@@ -53,6 +53,9 @@
 @property (strong, nonatomic) UIScrollView *instaScrollView;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
 @property (strong, nonatomic) RepeatingButton *backspaceButton;
+@property (strong, nonatomic) UIView *shareInstructionView;
+@property (strong, nonatomic) UILabel *shareInstructionLabel;
+@property (strong, nonatomic) NSTimer *shareInstructionTimer;
 @property (nonatomic) BOOL loggedInInsta;
 @property (nonatomic) BOOL reachable;
 @property (nonatomic) BOOL loadingNewImages;

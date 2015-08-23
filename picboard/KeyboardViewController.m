@@ -10,6 +10,7 @@
 #import "KeyboardViewController.h"
 #import "Heap.h"
 #import "InstagramPhotoCollectionViewCell.h"
+@import MobileCoreServices;
 
 #define IsEqual(x,y) ((x&&y&&[x isEqual:y])||(!x&&!y)||x==y)
 
@@ -199,6 +200,24 @@
     [self.view addSubview:self.collectionView];
     
     
+    self.shareInstructionView = [[UIView alloc] initWithFrame:self.collectionView.frame];
+    self.shareInstructionView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.9f];
+    self.shareInstructionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.shareInstructionView.hidden = YES;
+    [self.shareInstructionView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapShareInstructionView:)]];
+    [self.view addSubview:self.shareInstructionView];
+    
+    self.shareInstructionLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.shareInstructionView.bounds, 12, 12)];
+    self.shareInstructionLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.shareInstructionLabel.font = [UIFont systemFontOfSize:19];
+    self.shareInstructionLabel.text = @"Tap where you want the image to go.\n\nThen tap \"Paste\".";
+    self.shareInstructionLabel.numberOfLines = 0;
+    self.shareInstructionLabel.textAlignment = NSTextAlignmentCenter;
+    [self.shareInstructionView addSubview:self.shareInstructionLabel];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)]];
+    
+    
     if (![self isOpenAccessGranted]) {
         [self displayFullAccessMessage];
     } else {
@@ -339,10 +358,12 @@
 }
 
 - (void)backspacePressed:(id)sender {
+    [self hideShareInstructionView];
     [self.textDocumentProxy deleteBackward];
 }
 
 - (void)nextInputMode:(id)sender {
+    [self hideShareInstructionView];
     [self advanceToNextInputMode];
 }
 
@@ -426,11 +447,24 @@
     NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
 //    NSLog(@"session key: %@", sessionKey);
     NSString *url;
+    
+    NSString *searchString = nil; // hash tag
+    
     if (self.instagramObjects.count > 0) {
-        url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7&max_id=%@", sessionKey, [[self.instagramObjects lastObject] photoID]];
+        if(searchString.length){
+            url = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=%@&count=7&max_tag_id=%@",searchString,sessionKey,[[self.instagramObjects lastObject] photoID]];
+        } else {
+            url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7&max_id=%@", sessionKey, [[self.instagramObjects lastObject] photoID]];
+        }
     } else {
-        url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7", sessionKey];
+        if(searchString.length){
+            url = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=%@&count=7",searchString,sessionKey];
+        } else {
+            url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@&count=7", sessionKey];
+        }
     }
+    
+    
     
     NSURL *nsurl=[NSURL URLWithString:url];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -574,9 +608,29 @@
     InstagramObject *object = self.instagramObjects[[self.collectionView indexPathForCell:cell].item];
     
     if(object){
-        [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", object.link, PROMO_TEXT]];
         
-        [Heap track:@"Send Photo Link"];
+        if([UIPasteboard generalPasteboard]&&cell.imageView.image){
+            
+            NSDictionary *imgDic = @{(NSString*)kUTTypeJPEG:cell.imageView.image};
+            NSDictionary *stringDic = @{(NSString*)kUTTypeUTF8PlainText:@"Sent via KeyFeed - www.apple.co/1DbnRU3"};
+            
+            [[UIPasteboard generalPasteboard] setItems:@[imgDic,stringDic]];
+            
+            self.shareInstructionView.alpha = 0.0f;
+            self.shareInstructionView.hidden = NO;
+            [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.shareInstructionView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                self.shareInstructionTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideShareInstructionView) userInfo:nil repeats:NO];
+            }];
+            
+        } else {
+        
+            [self.textDocumentProxy insertText:[NSString stringWithFormat:@"%@ %@ ", object.link, PROMO_TEXT]];
+        
+            [Heap track:@"Send Photo Link"];
+            
+        }
     }
     
 }
@@ -619,6 +673,29 @@
 //    NSLog(@"Long press");
 }
 
+
+
+-(void)tapShareInstructionView:(UITapGestureRecognizer*)recognizer{
+    [self hideShareInstructionView];
+}
+
+-(void)tapView:(UITapGestureRecognizer*)recognizer{
+    [self hideShareInstructionView];
+}
+
+-(void)hideShareInstructionView{
+    if(!self.shareInstructionView.hidden){
+        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.shareInstructionView.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            self.shareInstructionView.hidden = YES;
+        }];
+    }
+    if(self.shareInstructionTimer){
+        [self.shareInstructionTimer invalidate];
+        self.shareInstructionTimer = nil;
+    }
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.collectionView) {
@@ -701,6 +778,8 @@
             [self landscape];
         }
     
+    self.shareInstructionView.frame = self.collectionView.frame;
+    self.shareInstructionLabel.frame = CGRectInset(self.shareInstructionView.bounds, 12, 12);
     
 }
 
