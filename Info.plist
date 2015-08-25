@@ -32,9 +32,17 @@
 				<string>ig4efbf1dd9a1b4a058a4c3772876d9400</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>instakey</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>13</string>
+	<string>14</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

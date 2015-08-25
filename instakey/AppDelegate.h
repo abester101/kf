@@ -11,7 +11,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-#define APP_ID @"4efbf1dd9a1b4a058a4c3772876d9400"
+#define APP_ID @"44da35c3aec84759ada97a7cf94bfe30"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -36,7 +36,7 @@ static NSString *const scope = @"likes";
     NSString *authUrlString = [NSString stringWithFormat:@"%@/?client_id=%@&redirect_uri=%@&scope=%@&response_type=token&display=touch",
                                 @"https://api.instagram.com/oauth/authorize",
                                 APP_ID,
-                                [NSString stringWithFormat:@"ig%@://authorize", APP_ID],
+                                [NSString stringWithFormat:@"instakey://authorize"],
                                 @"likes"];
     
     NSURLRequest *authRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:authUrlString]];

@@ -16,7 +16,7 @@
 
 #define APP_GROUP @"group.KeyFeed.KeyFeed"
 
-#define APP_ID @"4efbf1dd9a1b4a058a4c3772876d9400"
+#define APP_ID @"44da35c3aec84759ada97a7cf94bfe30"
 #define PROMO_TEXT @"\n\nSent via KeyFeed - www.apple.co/1DbnRU3"
 
 #import "RepeatingButton.h"
