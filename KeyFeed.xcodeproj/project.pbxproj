@@ -232,6 +232,18 @@
 		E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */; };
 		E727C3061B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
 		E727C3081B6BE97F001D2E6E /* InstagramPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */; };
+		E770E0551B8CF6B8008FDD49 /* SearchKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0541B8CF6B8008FDD49 /* SearchKeyboardView.m */; };
+		E770E0581B8CF6C6008FDD49 /* SearchKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E770E0571B8CF6C6008FDD49 /* SearchKeyboardView.xib */; };
+		E770E0721B8CF9C8008FDD49 /* ACDarkAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E05E1B8CF9C8008FDD49 /* ACDarkAppearance.m */; };
+		E770E0731B8CF9C8008FDD49 /* ACLightAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0601B8CF9C8008FDD49 /* ACLightAppearance.m */; };
+		E770E0741B8CF9C8008FDD49 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0631B8CF9C8008FDD49 /* UIDevice+Hardware.m */; };
+		E770E0751B8CF9C8008FDD49 /* UIScreen+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0651B8CF9C8008FDD49 /* UIScreen+Orientation.m */; };
+		E770E0761B8CF9C8008FDD49 /* ACKey.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0681B8CF9C8008FDD49 /* ACKey.m */; };
+		E770E0771B8CF9C8008FDD49 /* ACLockKey.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E06A1B8CF9C8008FDD49 /* ACLockKey.m */; };
+		E770E0781B8CF9C8008FDD49 /* PadKeyboardMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E06F1B8CF9C8008FDD49 /* PadKeyboardMetrics.m */; };
+		E770E0791B8CF9C8008FDD49 /* PhoneKeyboardMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E0711B8CF9C8008FDD49 /* PhoneKeyboardMetrics.m */; };
+		E770E07C1B8D006B008FDD49 /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E770E07B1B8D006B008FDD49 /* KeyButton.m */; };
+		E77E1F971B8D232C007C91F3 /* FakeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E77E1F961B8D232C007C91F3 /* FakeTextField.m */; };
 		E7A89F721B825D370070C687 /* RepeatingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A89F711B825D370070C687 /* RepeatingButton.m */; };
 		E7A89F731B825D370070C687 /* RepeatingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A89F711B825D370070C687 /* RepeatingButton.m */; };
 		E7B5F4011B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F4001B7E8A7F00935AC8 /* InstagramAuthenticationViewController.m */; };
@@ -446,6 +458,31 @@
 		E727C3021B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E727C3031B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		E770E0531B8CF6B8008FDD49 /* SearchKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchKeyboardView.h; sourceTree = "<group>"; };
+		E770E0541B8CF6B8008FDD49 /* SearchKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchKeyboardView.m; sourceTree = "<group>"; };
+		E770E0571B8CF6C6008FDD49 /* SearchKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchKeyboardView.xib; sourceTree = "<group>"; };
+		E770E05D1B8CF9C8008FDD49 /* ACDarkAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDarkAppearance.h; sourceTree = "<group>"; };
+		E770E05E1B8CF9C8008FDD49 /* ACDarkAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDarkAppearance.m; sourceTree = "<group>"; };
+		E770E05F1B8CF9C8008FDD49 /* ACLightAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLightAppearance.h; sourceTree = "<group>"; };
+		E770E0601B8CF9C8008FDD49 /* ACLightAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLightAppearance.m; sourceTree = "<group>"; };
+		E770E0621B8CF9C8008FDD49 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
+		E770E0631B8CF9C8008FDD49 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
+		E770E0641B8CF9C8008FDD49 /* UIScreen+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+Orientation.h"; sourceTree = "<group>"; };
+		E770E0651B8CF9C8008FDD49 /* UIScreen+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+Orientation.m"; sourceTree = "<group>"; };
+		E770E0671B8CF9C8008FDD49 /* ACKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACKey.h; sourceTree = "<group>"; };
+		E770E0681B8CF9C8008FDD49 /* ACKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACKey.m; sourceTree = "<group>"; };
+		E770E0691B8CF9C8008FDD49 /* ACLockKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLockKey.h; sourceTree = "<group>"; };
+		E770E06A1B8CF9C8008FDD49 /* ACLockKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLockKey.m; sourceTree = "<group>"; };
+		E770E06B1B8CF9C8008FDD49 /* Linear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Linear.h; sourceTree = "<group>"; };
+		E770E06D1B8CF9C8008FDD49 /* Metrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metrics.h; sourceTree = "<group>"; };
+		E770E06E1B8CF9C8008FDD49 /* PadKeyboardMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PadKeyboardMetrics.h; sourceTree = "<group>"; };
+		E770E06F1B8CF9C8008FDD49 /* PadKeyboardMetrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PadKeyboardMetrics.m; sourceTree = "<group>"; };
+		E770E0701B8CF9C8008FDD49 /* PhoneKeyboardMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneKeyboardMetrics.h; sourceTree = "<group>"; };
+		E770E0711B8CF9C8008FDD49 /* PhoneKeyboardMetrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneKeyboardMetrics.m; sourceTree = "<group>"; };
+		E770E07A1B8D006B008FDD49 /* KeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyButton.h; sourceTree = "<group>"; };
+		E770E07B1B8D006B008FDD49 /* KeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyButton.m; sourceTree = "<group>"; };
+		E77E1F951B8D232C007C91F3 /* FakeTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeTextField.h; sourceTree = "<group>"; };
+		E77E1F961B8D232C007C91F3 /* FakeTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeTextField.m; sourceTree = "<group>"; };
 		E7A89F701B825D370070C687 /* RepeatingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatingButton.h; sourceTree = "<group>"; };
 		E7A89F711B825D370070C687 /* RepeatingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatingButton.m; sourceTree = "<group>"; };
 		E7B5F3FF1B7E8A7F00935AC8 /* InstagramAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramAuthenticationViewController.h; sourceTree = "<group>"; };
@@ -745,6 +782,14 @@
 				E727C3041B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.xib */,
 				E7A89F701B825D370070C687 /* RepeatingButton.h */,
 				E7A89F711B825D370070C687 /* RepeatingButton.m */,
+				E770E0531B8CF6B8008FDD49 /* SearchKeyboardView.h */,
+				E770E0541B8CF6B8008FDD49 /* SearchKeyboardView.m */,
+				E770E0571B8CF6C6008FDD49 /* SearchKeyboardView.xib */,
+				E77E1F951B8D232C007C91F3 /* FakeTextField.h */,
+				E77E1F961B8D232C007C91F3 /* FakeTextField.m */,
+				E770E07A1B8D006B008FDD49 /* KeyButton.h */,
+				E770E07B1B8D006B008FDD49 /* KeyButton.m */,
+				E770E05A1B8CF99E008FDD49 /* ACKeyboard */,
 				ADF433A41A1F731200134224 /* Supporting Files */,
 			);
 			path = picboard;
@@ -768,6 +813,63 @@
 				65D639837A0CAB41F68339C7 /* libPods-KeyFeedKeyboard.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E770E05A1B8CF99E008FDD49 /* ACKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				E770E05C1B8CF9C8008FDD49 /* Appearance */,
+				E770E0611B8CF9C8008FDD49 /* Categories */,
+				E770E0661B8CF9C8008FDD49 /* Classes */,
+				E770E06B1B8CF9C8008FDD49 /* Linear.h */,
+				E770E06C1B8CF9C8008FDD49 /* Metrics */,
+			);
+			name = ACKeyboard;
+			sourceTree = "<group>";
+		};
+		E770E05C1B8CF9C8008FDD49 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				E770E05D1B8CF9C8008FDD49 /* ACDarkAppearance.h */,
+				E770E05E1B8CF9C8008FDD49 /* ACDarkAppearance.m */,
+				E770E05F1B8CF9C8008FDD49 /* ACLightAppearance.h */,
+				E770E0601B8CF9C8008FDD49 /* ACLightAppearance.m */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		E770E0611B8CF9C8008FDD49 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E770E0621B8CF9C8008FDD49 /* UIDevice+Hardware.h */,
+				E770E0631B8CF9C8008FDD49 /* UIDevice+Hardware.m */,
+				E770E0641B8CF9C8008FDD49 /* UIScreen+Orientation.h */,
+				E770E0651B8CF9C8008FDD49 /* UIScreen+Orientation.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E770E0661B8CF9C8008FDD49 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E770E0671B8CF9C8008FDD49 /* ACKey.h */,
+				E770E0681B8CF9C8008FDD49 /* ACKey.m */,
+				E770E0691B8CF9C8008FDD49 /* ACLockKey.h */,
+				E770E06A1B8CF9C8008FDD49 /* ACLockKey.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E770E06C1B8CF9C8008FDD49 /* Metrics */ = {
+			isa = PBXGroup;
+			children = (
+				E770E06D1B8CF9C8008FDD49 /* Metrics.h */,
+				E770E06E1B8CF9C8008FDD49 /* PadKeyboardMetrics.h */,
+				E770E06F1B8CF9C8008FDD49 /* PadKeyboardMetrics.m */,
+				E770E0701B8CF9C8008FDD49 /* PhoneKeyboardMetrics.h */,
+				E770E0711B8CF9C8008FDD49 /* PhoneKeyboardMetrics.m */,
+			);
+			path = Metrics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1058,6 +1160,7 @@
 				ADF1185C1AA30C06009094E3 /* dashbutton.png in Resources */,
 				ADF1185D1AA30C06009094E3 /* dashbutton@2x.png in Resources */,
 				ADF1185E1AA30C06009094E3 /* zerobutton.png in Resources */,
+				E770E0581B8CF6C6008FDD49 /* SearchKeyboardView.xib in Resources */,
 				ADF1185F1AA30C06009094E3 /* zerobutton@2x.png in Resources */,
 				ADF118601AA30C06009094E3 /* ninebutton.png in Resources */,
 				ADF118611AA30C06009094E3 /* ninebutton@2x.png in Resources */,
@@ -1212,11 +1315,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E770E0771B8CF9C8008FDD49 /* ACLockKey.m in Sources */,
+				E770E0741B8CF9C8008FDD49 /* UIDevice+Hardware.m in Sources */,
 				E727C3051B6BE263001D2E6E /* InstagramPhotoCollectionViewCell.m in Sources */,
 				ADDBD8F71AABB4E800566F7F /* Reachability.m in Sources */,
+				E770E0731B8CF9C8008FDD49 /* ACLightAppearance.m in Sources */,
+				E770E0721B8CF9C8008FDD49 /* ACDarkAppearance.m in Sources */,
 				ADDBD8F81AABB4E800566F7F /* Reachability.h in Sources */,
+				E770E0751B8CF9C8008FDD49 /* UIScreen+Orientation.m in Sources */,
+				E770E07C1B8D006B008FDD49 /* KeyButton.m in Sources */,
+				E770E0781B8CF9C8008FDD49 /* PadKeyboardMetrics.m in Sources */,
+				E77E1F971B8D232C007C91F3 /* FakeTextField.m in Sources */,
+				E770E0791B8CF9C8008FDD49 /* PhoneKeyboardMetrics.m in Sources */,
 				ADF433A81A1F731200134224 /* KeyboardViewController.m in Sources */,
 				E7A89F731B825D370070C687 /* RepeatingButton.m in Sources */,
+				E770E0761B8CF9C8008FDD49 /* ACKey.m in Sources */,
+				E770E0551B8CF6B8008FDD49 /* SearchKeyboardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

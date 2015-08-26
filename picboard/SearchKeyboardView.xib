@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchKeyboardView">
+            <rect key="frame" x="0.0" y="-6" width="451.5" height="204"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="awg-8k-fga" customClass="KeyButton">
+                    <rect key="frame" x="8" y="8" width="38" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Q"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="tSv-jU-UFE"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="dTH-PT-2EM" customClass="KeyButton">
+                    <rect key="frame" x="51.5" y="8" width="38.5" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="W"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Sin-Id-PmC"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="Hd1-w0-Ihd" customClass="KeyButton">
+                    <rect key="frame" x="96" y="8" width="38.5" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="E"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="DIF-dg-roU"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="bh3-Nn-sLF" customClass="KeyButton">
+                    <rect key="frame" x="140.5" y="8" width="38" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="R"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Qbq-5y-44V"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="PI7-qh-scJ" customClass="KeyButton">
+                    <rect key="frame" x="185" y="8" width="38.5" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="T"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="qr8-sL-q2E"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-fg-01A" customClass="KeyButton">
+                    <rect key="frame" x="229.5" y="8" width="37" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Y"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="G3q-Rv-CqO"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="n8c-8F-AIo" customClass="KeyButton">
+                    <rect key="frame" x="272.5" y="8" width="38.5" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="U"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="LNm-de-wnN"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="l6b-81-kca" customClass="KeyButton">
+                    <rect key="frame" x="317" y="8" width="38" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="I"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="OxR-y7-wzw"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cDD-Ty-1jk" customClass="KeyButton">
+                    <rect key="frame" x="361.5" y="8" width="38" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="O"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="1Qy-2w-fnE"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="fjQ-VF-M6y" customClass="KeyButton">
+                    <rect key="frame" x="406" y="8" width="37.5" height="57"/>
+                    <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="P"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="GMN-29-74n"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-sR-Ir8">
+                    <rect key="frame" x="31.5" y="72.5" width="388.5" height="58"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cg-OV-mgq" customClass="KeyButton">
+                            <rect key="frame" x="0.0" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="A"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="iS3-Z8-Rta"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MfZ-vt-hWL" customClass="KeyButton">
+                            <rect key="frame" x="43.5" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="S"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="38E-ql-N5n"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6oh-Mh-Los" customClass="KeyButton">
+                            <rect key="frame" x="87" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="D"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="jGC-jM-or8"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YPr-Th-uQj" customClass="KeyButton">
+                            <rect key="frame" x="130.5" y="0.0" width="37.5" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="F"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Sro-sY-eVo"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ulJ-b2-ziU" customClass="KeyButton">
+                            <rect key="frame" x="174" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="G"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="LgG-CA-7Yz"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84E-42-EFQ" customClass="KeyButton">
+                            <rect key="frame" x="218.5" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="H"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="K2V-Of-yCm"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zbp-J6-jX2" customClass="KeyButton">
+                            <rect key="frame" x="262" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="J"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="frx-Nu-APp"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3f-DK-emF" customClass="KeyButton">
+                            <rect key="frame" x="306.5" y="0.0" width="37.5" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="K"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Xex-zc-iba"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="08I-94-yAJ" customClass="KeyButton">
+                            <rect key="frame" x="350" y="0.0" width="38" height="58"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="L"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773029999997" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Pt6-hA-vw4"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ulJ-b2-ziU" firstAttribute="height" secondItem="9cg-OV-mgq" secondAttribute="height" id="2JK-Eg-s1G"/>
+                        <constraint firstItem="6oh-Mh-Los" firstAttribute="leading" secondItem="MfZ-vt-hWL" secondAttribute="trailing" constant="6" id="3Hn-w7-0Bb"/>
+                        <constraint firstAttribute="bottom" secondItem="YPr-Th-uQj" secondAttribute="bottom" id="4ev-2k-WE0"/>
+                        <constraint firstItem="6oh-Mh-Los" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="5Dh-ad-iUj"/>
+                        <constraint firstItem="84E-42-EFQ" firstAttribute="leading" secondItem="ulJ-b2-ziU" secondAttribute="trailing" constant="6" id="5JY-nl-fs5"/>
+                        <constraint firstItem="MfZ-vt-hWL" firstAttribute="leading" secondItem="9cg-OV-mgq" secondAttribute="trailing" constant="6" id="8mX-Jv-BYR"/>
+                        <constraint firstItem="84E-42-EFQ" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="9bA-pu-Qxc"/>
+                        <constraint firstItem="k3f-DK-emF" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="9ea-Cj-hle"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="MfZ-vt-hWL" secondAttribute="height" id="AWu-Oc-Mea"/>
+                        <constraint firstItem="YPr-Th-uQj" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="Bi9-8V-5BM"/>
+                        <constraint firstItem="08I-94-yAJ" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="GXf-gP-Cvz"/>
+                        <constraint firstItem="Zbp-J6-jX2" firstAttribute="leading" secondItem="84E-42-EFQ" secondAttribute="trailing" constant="6" id="I3X-29-poK"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="Zbp-J6-jX2" secondAttribute="height" id="JMr-6c-uPf"/>
+                        <constraint firstItem="ulJ-b2-ziU" firstAttribute="leading" secondItem="YPr-Th-uQj" secondAttribute="trailing" constant="6" id="Kxu-lA-CAh"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="84E-42-EFQ" secondAttribute="width" id="L8R-HX-wmJ"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="leading" secondItem="yEh-sR-Ir8" secondAttribute="leading" id="Mpp-gC-VUT"/>
+                        <constraint firstAttribute="trailing" secondItem="08I-94-yAJ" secondAttribute="trailing" id="O4g-XZ-Sb0"/>
+                        <constraint firstItem="YPr-Th-uQj" firstAttribute="height" secondItem="9cg-OV-mgq" secondAttribute="height" id="PO9-Re-yLD"/>
+                        <constraint firstItem="YPr-Th-uQj" firstAttribute="leading" secondItem="6oh-Mh-Los" secondAttribute="trailing" constant="6" id="Q6H-e9-0DK"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="6oh-Mh-Los" secondAttribute="height" id="Ryl-zQ-ye2"/>
+                        <constraint firstItem="YPr-Th-uQj" firstAttribute="width" secondItem="9cg-OV-mgq" secondAttribute="width" id="WTg-2H-HLV"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="WYU-hA-uWM"/>
+                        <constraint firstAttribute="bottom" secondItem="84E-42-EFQ" secondAttribute="bottom" id="XPe-Uj-R3k"/>
+                        <constraint firstAttribute="bottom" secondItem="9cg-OV-mgq" secondAttribute="bottom" id="YeR-IV-8cn"/>
+                        <constraint firstAttribute="bottom" secondItem="ulJ-b2-ziU" secondAttribute="bottom" id="ZXD-WZ-m3B"/>
+                        <constraint firstItem="ulJ-b2-ziU" firstAttribute="width" secondItem="9cg-OV-mgq" secondAttribute="width" id="aoS-2K-hJE"/>
+                        <constraint firstAttribute="bottom" secondItem="MfZ-vt-hWL" secondAttribute="bottom" id="at5-Qp-cxp"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="08I-94-yAJ" secondAttribute="height" id="b8d-yQ-YDj"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="MfZ-vt-hWL" secondAttribute="width" id="eSs-6Q-Fw7"/>
+                        <constraint firstItem="MfZ-vt-hWL" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="esg-lO-beb"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="k3f-DK-emF" secondAttribute="height" id="ffW-1P-2Xs"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="6oh-Mh-Los" secondAttribute="width" id="g93-Ie-yuL"/>
+                        <constraint firstAttribute="bottom" secondItem="k3f-DK-emF" secondAttribute="bottom" id="gib-fF-7bX"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="Zbp-J6-jX2" secondAttribute="width" id="gzT-kK-187"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="k3f-DK-emF" secondAttribute="width" id="hVV-ol-4th"/>
+                        <constraint firstAttribute="bottom" secondItem="Zbp-J6-jX2" secondAttribute="bottom" id="mcg-Fk-0ve"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="08I-94-yAJ" secondAttribute="width" id="sAA-f1-vTq"/>
+                        <constraint firstAttribute="bottom" secondItem="6oh-Mh-Los" secondAttribute="bottom" id="snG-jX-eGi"/>
+                        <constraint firstAttribute="bottom" secondItem="08I-94-yAJ" secondAttribute="bottom" id="uFw-u4-a8Q"/>
+                        <constraint firstItem="k3f-DK-emF" firstAttribute="leading" secondItem="Zbp-J6-jX2" secondAttribute="trailing" constant="6" id="v2Y-RS-rGH"/>
+                        <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="84E-42-EFQ" secondAttribute="height" id="vcu-uD-DWw"/>
+                        <constraint firstItem="ulJ-b2-ziU" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="w7k-F5-vI5"/>
+                        <constraint firstItem="Zbp-J6-jX2" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="top" id="yGU-ni-YKd"/>
+                        <constraint firstItem="08I-94-yAJ" firstAttribute="leading" secondItem="k3f-DK-emF" secondAttribute="trailing" constant="6" id="ypm-EL-rWA"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZ2-dn-XgJ">
+                    <rect key="frame" x="74" y="138.5" width="303.5" height="57"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="L2i-jo-gqh" customClass="KeyButton">
+                            <rect key="frame" x="0.0" y="0.0" width="38.5" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Z"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="rzf-RU-W5E"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="9Ko-5y-hpf" customClass="KeyButton">
+                            <rect key="frame" x="44.5" y="0.0" width="38" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="X"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="WdA-fa-fRk"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-Na-I1B" customClass="KeyButton">
+                            <rect key="frame" x="88" y="0.0" width="38" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="C"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="EJS-pr-0X0"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="7Oz-lW-0Mf" customClass="KeyButton">
+                            <rect key="frame" x="132.5" y="0.0" width="38" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="V"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Cmc-BO-74M"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="6Od-d8-51p" customClass="KeyButton">
+                            <rect key="frame" x="176.5" y="0.0" width="38" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="B"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="2QT-GK-GfM"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="drA-nM-pxS" customClass="KeyButton">
+                            <rect key="frame" x="220" y="0.0" width="39" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="N"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="uoN-am-HFy"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="LJR-nh-gO9" customClass="KeyButton">
+                            <rect key="frame" x="265.5" y="0.0" width="38" height="57"/>
+                            <color key="backgroundColor" red="0.93672847747802734" green="0.9366646409034729" blue="0.93670195341110229" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="M"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                    <color key="value" white="0.099660773026315791" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedTitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="Kf2-ib-BzL"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="drA-nM-pxS" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="0ou-tR-eCG"/>
+                        <constraint firstItem="L2i-jo-gqh" firstAttribute="leading" secondItem="dZ2-dn-XgJ" secondAttribute="leading" id="2yC-5w-fbt"/>
+                        <constraint firstAttribute="bottom" secondItem="drA-nM-pxS" secondAttribute="bottom" id="4A3-cj-IGa"/>
+                        <constraint firstItem="6Od-d8-51p" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="4k4-Pd-xic"/>
+                        <constraint firstItem="7Oz-lW-0Mf" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="4xg-7B-tb1"/>
+                        <constraint firstAttribute="bottom" secondItem="9Ko-5y-hpf" secondAttribute="bottom" id="6Cj-Lv-3k6"/>
+                        <constraint firstItem="7Oz-lW-0Mf" firstAttribute="leading" secondItem="1CG-Na-I1B" secondAttribute="trailing" constant="6" id="7hi-wW-5oG"/>
+                        <constraint firstItem="LJR-nh-gO9" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="AVG-It-A6V"/>
+                        <constraint firstItem="1CG-Na-I1B" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="DjI-55-PGy"/>
+                        <constraint firstAttribute="bottom" secondItem="6Od-d8-51p" secondAttribute="bottom" id="G4f-zL-eDf"/>
+                        <constraint firstItem="9Ko-5y-hpf" firstAttribute="leading" secondItem="L2i-jo-gqh" secondAttribute="trailing" constant="6" id="HxX-Tk-Us2"/>
+                        <constraint firstItem="9Ko-5y-hpf" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="MMa-JH-zGe"/>
+                        <constraint firstAttribute="bottom" secondItem="LJR-nh-gO9" secondAttribute="bottom" id="NQl-VV-SD5"/>
+                        <constraint firstAttribute="trailing" secondItem="LJR-nh-gO9" secondAttribute="trailing" id="VVI-3M-4lv"/>
+                        <constraint firstItem="6Od-d8-51p" firstAttribute="leading" secondItem="7Oz-lW-0Mf" secondAttribute="trailing" constant="6" id="Vfh-It-vmZ"/>
+                        <constraint firstAttribute="bottom" secondItem="7Oz-lW-0Mf" secondAttribute="bottom" id="Yqq-Yt-FTe"/>
+                        <constraint firstItem="LJR-nh-gO9" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="ZaQ-zw-dVC"/>
+                        <constraint firstItem="LJR-nh-gO9" firstAttribute="leading" secondItem="drA-nM-pxS" secondAttribute="trailing" constant="6" id="bob-iH-iGa"/>
+                        <constraint firstItem="1CG-Na-I1B" firstAttribute="leading" secondItem="9Ko-5y-hpf" secondAttribute="trailing" constant="6" id="bwk-NR-NdP"/>
+                        <constraint firstItem="drA-nM-pxS" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="dV7-oJ-eC9"/>
+                        <constraint firstItem="L2i-jo-gqh" firstAttribute="top" secondItem="dZ2-dn-XgJ" secondAttribute="top" id="f9U-sa-xUi"/>
+                        <constraint firstAttribute="bottom" secondItem="L2i-jo-gqh" secondAttribute="bottom" id="hk9-at-mXg"/>
+                        <constraint firstItem="6Od-d8-51p" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="lyc-RD-vhe"/>
+                        <constraint firstItem="1CG-Na-I1B" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="rFY-a9-WDu"/>
+                        <constraint firstAttribute="bottom" secondItem="1CG-Na-I1B" secondAttribute="bottom" id="urL-gZ-N6s"/>
+                        <constraint firstItem="9Ko-5y-hpf" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="vME-DP-Mqf"/>
+                        <constraint firstItem="L2i-jo-gqh" firstAttribute="width" secondItem="7Oz-lW-0Mf" secondAttribute="width" id="xam-4a-fDt"/>
+                        <constraint firstItem="drA-nM-pxS" firstAttribute="leading" secondItem="6Od-d8-51p" secondAttribute="trailing" constant="6" id="ynJ-ok-chZ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="ken-Wc-JcY" customClass="KeyButton">
+                    <rect key="frame" x="394" y="138.5" width="49.5" height="57"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="GO"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapGo:" destination="iN0-l3-epB" eventType="touchUpInside" id="6NY-kZ-Z05"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="fQQ-vd-UhT" customClass="KeyButton">
+                    <rect key="frame" x="8" y="138.5" width="50" height="57"/>
+                    <color key="backgroundColor" white="0.79597553453947367" alpha="1" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="#"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapKeyButton:" destination="iN0-l3-epB" eventType="touchDown" id="uer-TD-o16"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="0.95999999999999996" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cDD-Ty-1jk" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="10q-Kx-kB8"/>
+                <constraint firstItem="fQQ-vd-UhT" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="bottom" constant="8" id="1AV-Ql-PSx"/>
+                <constraint firstItem="n8c-8F-AIo" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="1Ov-6U-UcD"/>
+                <constraint firstItem="fjQ-VF-M6y" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="4y8-1Y-7Ud"/>
+                <constraint firstItem="fjQ-VF-M6y" firstAttribute="leading" secondItem="cDD-Ty-1jk" secondAttribute="trailing" constant="6" id="5BP-dS-n9m"/>
+                <constraint firstItem="Hd1-w0-Ihd" firstAttribute="leading" secondItem="dTH-PT-2EM" secondAttribute="trailing" constant="6" id="6qy-o1-rHw"/>
+                <constraint firstItem="cDD-Ty-1jk" firstAttribute="leading" secondItem="l6b-81-kca" secondAttribute="trailing" constant="6" id="7Ms-3R-R65"/>
+                <constraint firstItem="Hd1-w0-Ihd" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="7Vy-s6-wjF"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="width" secondItem="dTH-PT-2EM" secondAttribute="width" id="7cx-pE-yov"/>
+                <constraint firstItem="9cg-OV-mgq" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="7r8-gN-aEP"/>
+                <constraint firstItem="n8c-8F-AIo" firstAttribute="leading" secondItem="Qg5-fg-01A" secondAttribute="trailing" constant="6" id="8v0-IM-ZgD"/>
+                <constraint firstItem="cDD-Ty-1jk" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="9r6-Ud-ejQ"/>
+                <constraint firstAttribute="trailing" secondItem="ken-Wc-JcY" secondAttribute="trailing" constant="8" id="AZv-4l-m6t"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="width" secondItem="L2i-jo-gqh" secondAttribute="width" id="BnK-FG-tdw"/>
+                <constraint firstItem="Qg5-fg-01A" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="DpB-UL-IgS"/>
+                <constraint firstItem="dZ2-dn-XgJ" firstAttribute="leading" secondItem="fQQ-vd-UhT" secondAttribute="trailing" constant="16" id="ECh-uo-Njj"/>
+                <constraint firstAttribute="centerX" secondItem="dZ2-dn-XgJ" secondAttribute="centerX" id="FXc-SF-VVB"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="width" secondItem="l6b-81-kca" secondAttribute="width" id="FcS-pg-iEh"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="height" secondItem="dTH-PT-2EM" secondAttribute="height" id="FkF-mT-ga2"/>
+                <constraint firstItem="fjQ-VF-M6y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="GZA-8E-bjD"/>
+                <constraint firstAttribute="bottom" secondItem="dZ2-dn-XgJ" secondAttribute="bottom" constant="8" id="H85-DV-55b"/>
+                <constraint firstItem="cDD-Ty-1jk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="M2E-Wr-3Oo"/>
+                <constraint firstItem="bh3-Nn-sLF" firstAttribute="leading" secondItem="Hd1-w0-Ihd" secondAttribute="trailing" constant="6" id="MYy-we-ElB"/>
+                <constraint firstAttribute="bottom" secondItem="fQQ-vd-UhT" secondAttribute="bottom" constant="8" id="N5F-ib-LnB"/>
+                <constraint firstItem="PI7-qh-scJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="NK8-ci-bw5"/>
+                <constraint firstItem="ken-Wc-JcY" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="bottom" constant="8" id="Pxe-mZ-xqV"/>
+                <constraint firstItem="n8c-8F-AIo" firstAttribute="width" secondItem="awg-8k-fga" secondAttribute="width" id="UM6-2i-8xT"/>
+                <constraint firstItem="bh3-Nn-sLF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="UY5-S4-tJR"/>
+                <constraint firstItem="Qg5-fg-01A" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="VpM-ie-RUf"/>
+                <constraint firstItem="dTH-PT-2EM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="XLk-Xs-Ka2"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="height" secondItem="l6b-81-kca" secondAttribute="height" id="bKp-iW-Sey"/>
+                <constraint firstAttribute="bottom" secondItem="ken-Wc-JcY" secondAttribute="bottom" constant="8" id="bia-Oi-h5G"/>
+                <constraint firstAttribute="centerX" secondItem="yEh-sR-Ir8" secondAttribute="centerX" id="cY8-td-oQU"/>
+                <constraint firstItem="ken-Wc-JcY" firstAttribute="leading" secondItem="dZ2-dn-XgJ" secondAttribute="trailing" constant="16" id="csa-lh-n7j"/>
+                <constraint firstItem="Hd1-w0-Ihd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="d4K-Ws-kPF"/>
+                <constraint firstItem="n8c-8F-AIo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="f3q-as-YCZ"/>
+                <constraint firstItem="fQQ-vd-UhT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="fHv-v6-onQ"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="height" secondItem="L2i-jo-gqh" secondAttribute="height" id="fZp-gk-uDX"/>
+                <constraint firstItem="Qg5-fg-01A" firstAttribute="leading" secondItem="PI7-qh-scJ" secondAttribute="trailing" constant="6" id="fnG-bL-2Oi"/>
+                <constraint firstItem="fjQ-VF-M6y" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="fpN-sB-cRy"/>
+                <constraint firstItem="dTH-PT-2EM" firstAttribute="leading" secondItem="awg-8k-fga" secondAttribute="trailing" constant="6" id="gp8-7G-h27"/>
+                <constraint firstItem="l6b-81-kca" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="hBc-UI-Elf"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="height" secondItem="bh3-Nn-sLF" secondAttribute="height" id="lUN-mS-h6g"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="width" secondItem="bh3-Nn-sLF" secondAttribute="width" id="m7p-to-r9r"/>
+                <constraint firstItem="PI7-qh-scJ" firstAttribute="leading" secondItem="bh3-Nn-sLF" secondAttribute="trailing" constant="6" id="miX-h5-vKx"/>
+                <constraint firstItem="Qg5-fg-01A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="oY1-AS-7iF"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="width" secondItem="PI7-qh-scJ" secondAttribute="width" id="rIH-qC-h5l"/>
+                <constraint firstItem="Hd1-w0-Ihd" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="sF2-a8-2q1"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="snx-1N-F03"/>
+                <constraint firstItem="l6b-81-kca" firstAttribute="leading" secondItem="n8c-8F-AIo" secondAttribute="trailing" constant="6" id="tds-Mj-4bx"/>
+                <constraint firstAttribute="trailing" secondItem="fjQ-VF-M6y" secondAttribute="trailing" constant="8" id="vwI-YS-eqx"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="height" secondItem="PI7-qh-scJ" secondAttribute="height" id="yZM-cH-a1f"/>
+                <constraint firstItem="dZ2-dn-XgJ" firstAttribute="top" secondItem="yEh-sR-Ir8" secondAttribute="bottom" constant="8" id="ynj-3c-FhW"/>
+                <constraint firstItem="awg-8k-fga" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="zCW-OQ-EuJ"/>
+                <constraint firstItem="9cg-OV-mgq" firstAttribute="height" secondItem="awg-8k-fga" secondAttribute="height" id="zR8-an-baS"/>
+                <constraint firstItem="yEh-sR-Ir8" firstAttribute="top" secondItem="awg-8k-fga" secondAttribute="bottom" constant="8" id="zU7-mH-934"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="goButton" destination="ken-Wc-JcY" id="qpI-PJ-fuN"/>
+                <outlet property="hashButton" destination="fQQ-vd-UhT" id="uTE-2d-xxZ"/>
+                <outletCollection property="keyButtons" destination="awg-8k-fga" id="8KO-eU-ame"/>
+            </connections>
+            <point key="canvasLocation" x="158.75" y="360"/>
+        </view>
+    </objects>
+</document>

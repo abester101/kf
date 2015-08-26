@@ -20,7 +20,8 @@
 #define PROMO_TEXT @"\n\nSent via KeyFeed - www.apple.co/1DbnRU3"
 
 #import "RepeatingButton.h"
-
+#import "SearchKeyboardView.h"
+#import "FakeTextField.h"
 
 @interface InstagramObject : NSObject
 
@@ -38,11 +39,13 @@
 @end
 
 
-@interface KeyboardViewController : UIInputViewController <IGSessionDelegate, NSURLConnectionDelegate, UIScrollViewDelegate>
+@interface KeyboardViewController : UIInputViewController <IGSessionDelegate, NSURLConnectionDelegate, UIScrollViewDelegate, SearchKeyboardViewDelegate, FakeTextFieldDelegate>
 
 @property (strong, nonatomic) Instagram *instagram;
 
 @property (strong, nonatomic) NSMutableOrderedSet *instagramObjects;
+
+@property (strong, nonatomic) UILabel *searchingLabel;
 
 @property (strong, nonatomic) NSMutableArray *instaLinks;
 @property (strong, nonatomic) NSMutableArray *instaNames;
@@ -62,5 +65,10 @@
 @property (nonatomic) int numberOfImagesAlreadyLoaded;
 @property (nonatomic) BOOL decimalKeyboardLoaded;
 @property (nonatomic) BOOL halfFrame;
+
+@property (strong, nonatomic) FakeTextField *searchField;
+@property (strong, nonatomic) SearchKeyboardView *searchKeyboardView;
+
+@property (strong, nonatomic) NSString *searchTerm;
 
 @end

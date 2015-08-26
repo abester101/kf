@@ -14,6 +14,8 @@
 
 #define IsEqual(x,y) ((x&&y&&[x isEqual:y])||(!x&&!y)||x==y)
 
+
+
 @implementation InstagramObject
 
 -(instancetype)initWithUsername:(NSString *)username caption:(NSString *)caption link:(NSString *)link photoID:(NSString *)photoID localPhoto:(NSString *)localPhoto{
@@ -122,6 +124,7 @@
     [self.nextKeyboardButton setBackgroundImage:globeImage forState:UIControlStateNormal];
     [self.nextKeyboardButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.nextKeyboardButton addTarget:self action:@selector(nextInputMode:) forControlEvents:UIControlEventTouchUpInside];
+    [self.nextKeyboardButton addConstraint:[NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:37]];
     
     [self.view addSubview:self.nextKeyboardButton];
     
@@ -130,6 +133,8 @@
     [self.view bringSubviewToFront:self.nextKeyboardButton];
     [self.view addConstraints:@[nextKeyboardButtonLeftSideConstraint, nextKeyboardButtonBottomConstraint]];
     
+    
+    
     self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:self.loadingSpinner];
     [self.loadingSpinner startAnimating];
@@ -137,12 +142,12 @@
     
     NSLayoutConstraint *centerXConstraint =
     [NSLayoutConstraint constraintWithItem:self.loadingSpinner
-                                 attribute:NSLayoutAttributeCenterX
+                                 attribute:NSLayoutAttributeLeft
                                  relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeCenterX
+                                    toItem:self.nextKeyboardButton
+                                 attribute:NSLayoutAttributeRight
                                 multiplier:1.0
-                                  constant:0.0];
+                                  constant:6.0];
     NSLayoutConstraint *spinnerBottomConstraint = [NSLayoutConstraint constraintWithItem:self.loadingSpinner
                                                                                attribute:NSLayoutAttributeBottom
                                                                                relatedBy:NSLayoutRelationEqual
@@ -161,6 +166,7 @@
     _backspaceButton.autorepeatStartDelay = 0.7f;
     _backspaceButton.autorepeatPressDelay = 0.17f;
     [_backspaceButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_backspaceButton addConstraint:[NSLayoutConstraint constraintWithItem:_backspaceButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:36]];
     [self.view addSubview:_backspaceButton];
     
     NSLayoutConstraint *backspaceRightConstraint =
@@ -181,12 +187,30 @@
     [self.view addConstraints:@[backspaceRightConstraint, backspaceBottomConstraint]];
     [self.view bringSubviewToFront:_backspaceButton];
     
+    self.searchField = [[FakeTextField alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+    self.searchField.placeholder = @"#search";
+    //self.searchField.textAlignment = NSTextAlignmentCenter;
+    //self.searchField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.searchField.label.font = [UIFont systemFontOfSize:14];
+    self.searchField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.searchField.hidden = YES;
+    self.searchField.delegate = self;
+    [self.searchField addConstraint:[NSLayoutConstraint constraintWithItem:self.searchField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:25]];
+
+    [self.view addSubview:self.searchField];
+    NSArray *sfConstraints = @[[NSLayoutConstraint constraintWithItem:self.searchField attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.loadingSpinner attribute:NSLayoutAttributeRight multiplier:1 constant:12],
+                               [NSLayoutConstraint constraintWithItem:self.searchField attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.backspaceButton attribute:NSLayoutAttributeLeft multiplier:1 constant:-44],
+                               [NSLayoutConstraint constraintWithItem:self.searchField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-5]];
+    [self.view addConstraints:sfConstraints];
+    
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumInteritemSpacing = 10;
     layout.sectionInset = UIEdgeInsetsMake(0, 10, 4, 0);
 //    layout.estimatedItemSize = CGSizeMake(140, 180);
+    
+    
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 184) collectionViewLayout:layout];
 
@@ -199,6 +223,18 @@
     self.collectionView.delegate = self;
     [self.view addSubview:self.collectionView];
     
+    self.searchKeyboardView = [[NSBundle mainBundle] loadNibNamed:@"SearchKeyboardView" owner:self options:nil].firstObject;
+    self.searchKeyboardView.frame = self.collectionView.frame;
+    self.searchKeyboardView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.searchKeyboardView.hidden = YES;
+    self.searchKeyboardView.delegate = self;
+    [self.view addSubview:self.searchKeyboardView];
+    
+    [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:self.searchKeyboardView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.searchKeyboardView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.searchKeyboardView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0],
+                                [NSLayoutConstraint constraintWithItem:self.searchKeyboardView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.nextKeyboardButton attribute:NSLayoutAttributeTop multiplier:1 constant:0]]];
+    
     
     self.shareInstructionView = [[UIView alloc] initWithFrame:self.collectionView.frame];
     self.shareInstructionView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.9f];
@@ -210,10 +246,18 @@
     self.shareInstructionLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.shareInstructionView.bounds, 12, 12)];
     self.shareInstructionLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.shareInstructionLabel.font = [UIFont systemFontOfSize:19];
-    self.shareInstructionLabel.text = @"Tap where you want the image to go.\n\nThen tap \"Paste\".";
+    self.shareInstructionLabel.text = @"Tap the text box and press \"paste\" to insert image";
     self.shareInstructionLabel.numberOfLines = 0;
     self.shareInstructionLabel.textAlignment = NSTextAlignmentCenter;
     [self.shareInstructionView addSubview:self.shareInstructionLabel];
+    
+    self.searchingLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.collectionView.bounds, 12, 12)];
+    self.searchingLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.searchingLabel.font = [UIFont systemFontOfSize:19];
+    self.searchingLabel.text = @"Loading...";
+    self.searchingLabel.textAlignment = NSTextAlignmentCenter;
+    self.searchingLabel.hidden = YES;
+    [self.view insertSubview:self.searchingLabel belowSubview:self.collectionView];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)]];
     
@@ -245,6 +289,7 @@
                         [self getPicsFromInsta];
                     }
                     _reachable = YES;
+                    self.searchField.hidden = NO;
                 }
             }
         };
@@ -359,7 +404,15 @@
 
 - (void)backspacePressed:(id)sender {
     [self hideShareInstructionView];
-    [self.textDocumentProxy deleteBackward];
+    if(!self.searchKeyboardView.hidden){
+        if(self.searchField.textValue.length>1){
+            self.searchField.textValue = [self.searchField.textValue substringToIndex:self.searchField.textValue.length-1];
+        } else {
+            self.searchField.textValue = @"";
+        }
+    } else {
+        [self.textDocumentProxy deleteBackward];
+    }
 }
 
 - (void)nextInputMode:(id)sender {
@@ -441,14 +494,41 @@
     });
 }
 
+-(void)setSearchTerm:(NSString *)searchTerm{
+    if(((searchTerm&&!_searchTerm)||(!searchTerm&&_searchTerm)) ||
+       ((searchTerm&&_searchTerm)&&![searchTerm isEqualToString:_searchTerm])){
+        _searchTerm = searchTerm;
+        _loadingNewImages = YES;
+        [self.collectionView performBatchUpdates:^{
+            NSMutableArray *ips = [NSMutableArray array];
+            for(NSInteger tmpXC = 0;tmpXC<self.instagramObjects.count;tmpXC++){
+                [ips addObject:[NSIndexPath indexPathForItem:tmpXC inSection:0]];
+            }
+            [self.instagramObjects removeAllObjects];
+            
+            [self.collectionView deleteItemsAtIndexPaths:ips];
+        } completion:^(BOOL finished) {
+            [self getPicsFromInsta];
+        }];
+        
+        
+    }
+    _searchTerm = searchTerm;
+}
+
 - (void)getPicsFromInsta {
     _halfFrame = NO;
     self.loadingSpinner.hidden = NO;
+    if(!self.instagramObjects.count){
+        [self showLoadingLabel:@"Loading..."];
+    }
+    
     NSString *sessionKey = [[[NSUserDefaults alloc] initWithSuiteName:APP_GROUP] objectForKey:@"accessToken"];
 //    NSLog(@"session key: %@", sessionKey);
     NSString *url;
     
-    NSString *searchString = nil; // hash tag
+    NSString *searchString = self.searchTerm; // hash tag
+    searchString = [[searchString stringByReplacingOccurrencesOfString:@"#" withString:@""] lowercaseString];
     
     if (self.instagramObjects.count > 0) {
         if(searchString.length){
@@ -533,6 +613,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.loadingSpinner.hidden = YES;
                 _loadingNewImages = NO;
+                
+                if(self.instagramObjects.count){
+                    [self hideLoadingLabel];
+                } else {
+                    [self showLoadingLabel:@"No photos found."];
+                }
                 
                 [self.collectionView flashScrollIndicators];
                 
@@ -730,7 +816,7 @@
     }
     
     self.collectionView.frame = scrollFrame;
-    
+//    self.searchKeyboardView.frame = self.collectionView.frame;
     @try{
         [self.collectionView performBatchUpdates:^{
         } completion:^(BOOL finished) {
@@ -760,6 +846,7 @@
     }
     
     self.collectionView.frame = scrollFrame;
+//    self.searchKeyboardView.frame = self.collectionView.frame;
     @try{
         [self.collectionView performBatchUpdates:^{
         } completion:^(BOOL finished) {
@@ -780,6 +867,8 @@
     
     self.shareInstructionView.frame = self.collectionView.frame;
     self.shareInstructionLabel.frame = CGRectInset(self.shareInstructionView.bounds, 12, 12);
+    
+    self.searchingLabel.frame = CGRectInset(self.collectionView.frame, 12, 12);
     
 }
 
@@ -840,6 +929,79 @@
     NSLog(@"connection did fail");
 }
 
+
+#pragma mark - Search Field Delegate
+
+-(void)tappedFakeTextField:(FakeTextField *)fakeTextField{
+    if(self.searchKeyboardView.hidden){
+        self.searchKeyboardView.alpha = 0.0f;
+        self.searchKeyboardView.hidden = NO;
+        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.searchKeyboardView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    self.searchField.showsCursor = YES;
+}
+
+-(void)tappedFakeTextFieldClearButton:(FakeTextField *)fakeTextField{
+    fakeTextField.textValue = @"";
+    self.searchTerm = nil;
+    [self hideSearchKeyboard];
+}
+
+-(void)hideSearchKeyboard{
+    if(!self.searchKeyboardView.hidden){
+        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.searchKeyboardView.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            self.searchKeyboardView.hidden = YES;
+        }];
+    }
+    self.searchField.showsCursor = NO;
+}
+
+-(void)searchKeyboard:(SearchKeyboardView *)searchKeyboardView tappedKey:(NSString *)key{
+    self.searchField.textValue = !self.searchField.textValue?key:[self.searchField.textValue stringByAppendingString:key];
+}
+
+-(void)searchKeyboardTappedGo:(SearchKeyboardView *)searchKeyboardView{
+    self.searchTerm = self.searchField.textValue;
+    [self hideSearchKeyboard];
+}
+
+-(void)showLoadingLabel:(NSString*)caption{
+    if(!self.searchingLabel.hidden){
+        [UIView transitionWithView:self.searchingLabel duration:0.15 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.searchingLabel.text = caption;
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if(self.searchingLabel.hidden){
+        if(caption){
+            self.searchingLabel.text = caption;
+        }
+        self.searchingLabel.alpha = 0.0f;
+        self.searchingLabel.hidden = NO;
+        [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.searchingLabel.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+-(void)hideLoadingLabel{
+    if(!self.searchingLabel.hidden){
+        [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.searchingLabel.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            self.searchingLabel.hidden = YES;
+        }];
+
+    }
+}
 
 
 @end
