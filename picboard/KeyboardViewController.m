@@ -306,11 +306,13 @@
                 [self.view addSubview:_textLabelFullAccess];
                 self.loadingSpinner.hidden = YES;
                 _reachable = NO;
+                self.searchField.hidden = YES;
             });
         };
         reach.failedBlock = ^(Reachability*reach) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self displayFullAccessMessage];
+                self.searchField.hidden = YES;
             });
         };
         [reach startNotifier];
@@ -936,6 +938,7 @@
     if(self.searchKeyboardView.hidden){
         self.searchKeyboardView.alpha = 0.0f;
         self.searchKeyboardView.hidden = NO;
+        [self.searchKeyboardView.superview bringSubviewToFront:self.searchKeyboardView];
         [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.searchKeyboardView.alpha = 1.0f;
         } completion:^(BOOL finished) {

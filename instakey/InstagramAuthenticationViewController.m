@@ -33,16 +33,16 @@ static NSString *const scope = @"likes";
     
     
     
-//    NSString *authUrlString = [NSString stringWithFormat:@"%@/?client_id=%@&redirect_uri=%@&scope=%@&response_type=token&display=touch",
-//                                @"https://api.instagram.com/oauth/authorize",
-//                                APP_ID,
-//                                [NSString stringWithFormat:@"instakey://authorize"],
-//                                @"likes"];
     NSString *authUrlString = [NSString stringWithFormat:@"%@/?client_id=%@&redirect_uri=%@&scope=%@&response_type=token&display=touch",
-                               @"https://api.instagram.com/oauth/authorize",
-                               APP_ID,
-                               [NSString stringWithFormat:@"ig%@://authorize", APP_ID],
-                               @"likes"];
+                                @"https://api.instagram.com/oauth/authorize",
+                                APP_ID,
+                                [NSString stringWithFormat:@"instakey://authorize"],
+                                @"likes"];
+//    NSString *authUrlString = [NSString stringWithFormat:@"%@/?client_id=%@&redirect_uri=%@&scope=%@&response_type=token&display=touch",
+//                               @"https://api.instagram.com/oauth/authorize",
+//                               APP_ID,
+//                               [NSString stringWithFormat:@"ig%@://authorize", APP_ID],
+//                               @"likes"];
     
     NSURLRequest *authRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:authUrlString]];
     [self.webView loadRequest:authRequest];
@@ -81,7 +81,7 @@ static NSString *const scope = @"likes";
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSURL *url = [request URL];
-    if([[url scheme] isEqualToString:[NSString stringWithFormat:@"ig%@://authorize", APP_ID]]){
+    if([[url scheme] isEqualToString:[NSString stringWithFormat:@"ig%@://authorize", APP_ID]]||[[url scheme] isEqualToString:@"instakey"]){
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [appDelegate.instagram handleOpenURL:url];
